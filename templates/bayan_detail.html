@@ -1,0 +1,288 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ bayan.title }} | Bayan | Shahid Nomani
+{% endblock %}
+
+{% block content %}
+
+
+<!-- =====================================================
+     BAYAN DETAIL HERO
+===================================================== -->
+
+<section class="page-hero">
+
+    <div class="container">
+
+        <span class="eyebrow">
+            LECTURE
+        </span>
+
+        <h1>
+            {{ bayan.title }}
+        </h1>
+
+        <p>
+            {% if bayan.upload_type == 'upload' %}
+                Uploaded Bayan
+            {% else %}
+                {{ bayan.platform or 'Online Bayan' }}
+            {% endif %}
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     BAYAN CONTENT
+===================================================== -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="detail-layout">
+
+            <article class="content-card bayan-detail-card">
+
+
+                <!-- =================================================
+                     THUMBNAIL
+                ================================================== -->
+
+                {% if bayan.thumbnail %}
+
+                <img
+                    src="{{ media_url(
+                        bayan.thumbnail,
+                        'bayans'
+                    ) }}"
+                    alt="{{ bayan.title }}"
+                >
+
+                {% else %}
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/branding/bayan1.jpg'
+                    ) }}"
+                    alt="{{ bayan.title }}"
+                >
+
+                {% endif %}
+
+
+                <!-- =================================================
+                     CONTENT
+                ================================================== -->
+
+                <div class="card-body">
+
+                    <span class="meta">
+
+                        {% if bayan.upload_type == 'upload' %}
+
+                            Uploaded Video
+
+                        {% elif bayan.upload_type == 'online' %}
+
+                            {{ bayan.platform or 'Online Bayan' }}
+
+                        {% else %}
+
+                            Bayan
+
+                        {% endif %}
+
+                    </span>
+
+
+                    <h1>
+                        {{ bayan.title }}
+                    </h1>
+
+
+                    <!-- =================================================
+                         INTERNAL UPLOADED VIDEO
+                    ================================================== -->
+
+                    {% if
+                        bayan.upload_type == 'upload'
+                        and bayan.video_file
+                    %}
+
+                    <div
+                        class="video-frame"
+                        style="margin: 24px 0;"
+                    >
+
+                        <video
+                            class="video-player"
+                            controls
+                            playsinline
+                            preload="metadata"
+                            src="{{ media_url(
+                                bayan.video_file,
+                                'bayans'
+                            ) }}"
+                        >
+
+                            Your browser does not support
+                            the video player.
+
+                        </video>
+
+                    </div>
+
+
+                    <div class="video-actions">
+
+                        <a
+                            class="text-link"
+                            href="{{ url_for(
+                                'public.bayans'
+                            ) }}"
+                        >
+
+                            <i class="fa-solid fa-arrow-left"></i>
+
+                            All Bayans
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         ONLINE VIDEO
+                    ================================================== -->
+
+                    {% elif external_video_url %}
+
+                    <div
+                        class="empty-state"
+                        style="margin: 24px 0;"
+                    >
+
+                        <i class="fa-solid fa-circle-play"></i>
+
+                        <h3>
+                            Watch this Bayan
+                        </h3>
+
+                        <p>
+                            This Bayan is available on
+                            {{ bayan.platform or 'an external video platform' }}.
+                        </p>
+
+
+                        <a
+                            class="btn btn-green"
+                            href="{{ external_video_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+
+                            Watch on
+                            {{ bayan.platform or 'Platform' }}
+
+                            <i
+                                class="fa-solid fa-arrow-up-right-from-square"
+                            ></i>
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         NO VIDEO
+                    ================================================== -->
+
+                    {% else %}
+
+                    <div
+                        class="empty-state"
+                        style="margin: 24px 0;"
+                    >
+
+                        <i class="fa-solid fa-video-slash"></i>
+
+                        <h3>
+                            Video not available
+                        </h3>
+
+                        <p>
+                            This Bayan does not currently
+                            have a playable video.
+                        </p>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- =================================================
+                         DESCRIPTION
+                    ================================================== -->
+
+                    {% if bayan.description %}
+
+                    <div
+                        class="bayan-description"
+                        style="margin-top: 28px;"
+                    >
+
+                        <h3>
+                            About this Bayan
+                        </h3>
+
+                        <p>
+                            {{ bayan.description }}
+                        </p>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- =================================================
+                         BACK LINK
+                    ================================================== -->
+
+                    <div
+                        class="detail-actions"
+                        style="margin-top: 28px;"
+                    >
+
+                        <a
+                            class="text-link"
+                            href="{{ url_for(
+                                'public.bayans'
+                            ) }}"
+                        >
+
+                            <i class="fa-solid fa-arrow-left"></i>
+
+                            Back to All Bayans
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,159 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <meta
+        name="description"
+        content="Official website of Shahid Nomani Al-Misbahi — Islamic lectures, articles, books and Urdu literature."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
+
+    <title>
+        {% block title %}
+            Shahid Nomani Al-Misbahi
+        {% endblock %}
+    </title>
+
+
+    <!-- =================================================
+         FAVICON
+    ================================================== -->
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="{{ url_for(
+            'static',
+            filename='images/branding/new-favicon.png'
+        ) }}"
+    >
+
+
+    <!-- =================================================
+         GOOGLE FONTS
+    ================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =================================================
+         FONT AWESOME
+    ================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- =================================================
+         MAIN CSS
+    ================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/style.css'
+        ) }}"
+    >
+
+
+    {% block head %}
+    {% endblock %}
+
+</head>
+
+
+<body>
+
+    <!-- =================================================
+         COMMON NAVBAR
+    ================================================== -->
+
+    {% include 'includes/navbar.html' %}
+
+
+    <!-- =================================================
+         PAGE CONTENT
+    ================================================== -->
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <!-- =================================================
+         COMMON FOOTER
+    ================================================== -->
+
+    {% include 'includes/footer.html' %}
+
+
+    <!-- =================================================
+         BACK TO TOP
+    ================================================== -->
+
+    <button
+        class="back-top"
+        id="backTop"
+        type="button"
+        aria-label="Back to top"
+    >
+
+        <i
+            class="fa-solid fa-arrow-up"
+            aria-hidden="true"
+        ></i>
+
+    </button>
+
+
+    <!-- =================================================
+         MAIN JAVASCRIPT
+    ================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/main.js'
+        ) }}"
+    ></script>
+
+
+    {% block scripts %}
+    {% endblock %}
+
+</body>
+
+</html>

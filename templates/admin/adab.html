@@ -1,0 +1,143 @@
+{% extends 'admin/base.html' %}
+
+
+{% block heading %}
+Urdu Adab
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="page-actions">
+
+    <a
+        class="admin-btn"
+        href="{{ url_for('admin.adab_new') }}"
+    >
+
+        <i class="fa-solid fa-plus"></i>
+
+        Add Adab
+
+    </a>
+
+</div>
+
+
+<div class="admin-table">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    Title
+                </th>
+
+                <th>
+                    Category
+                </th>
+
+                <th>
+                    Status
+                </th>
+
+                <th>
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+            {% for item in items %}
+
+
+            <tr>
+
+                <td>
+                    {{ item.title }}
+                </td>
+
+
+                <td>
+                    {{ item.category or 'Other' }}
+                </td>
+
+
+                <td>
+
+                    <span class="status">
+
+                        {{ 'Published'
+                        if item.is_published
+                        else 'Draft' }}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <form
+                        method="post"
+                        action="{{ url_for(
+                            'admin.adab_delete',
+                            item_id=item.id
+                        ) }}"
+                        onsubmit="return confirm('Delete this item?')"
+                    >
+
+                        {% include "_csrf.html" %}
+
+                        <button
+                            class="danger-link"
+                            type="submit"
+                        >
+
+                            Delete
+
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+
+            {% else %}
+
+
+            <tr>
+
+                <td
+                    colspan="4"
+                    class="empty-row"
+                >
+
+                    No Urdu Adab yet.
+
+                </td>
+
+            </tr>
+
+
+            {% endfor %}
+
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+{% endblock %}

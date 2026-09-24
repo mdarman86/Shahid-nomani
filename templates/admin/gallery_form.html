@@ -1,0 +1,114 @@
+{% extends 'admin/base.html' %}
+
+
+{% block heading %}
+Add Gallery Photo
+{% endblock %}
+
+
+{% block content %}
+
+
+<form
+    class="admin-form upload-form"
+    method="post"
+    enctype="multipart/form-data"
+    data-upload-form
+>
+
+    {% include "_csrf.html" %}
+
+
+    <label>
+
+        Photo
+
+        <input
+            type="file"
+            name="image"
+            accept="image/*"
+            required
+            data-upload-input
+        >
+
+    </label>
+
+
+    <label>
+
+        Caption
+
+        <input
+            type="text"
+            name="caption"
+            maxlength="300"
+            placeholder="Optional caption"
+        >
+
+    </label>
+
+
+    <div
+        class="upload-progress"
+        data-upload-progress
+        hidden
+    >
+
+        <div class="upload-progress-head">
+
+            <span>
+                Uploading photo
+            </span>
+
+            <strong data-upload-percent>
+                0%
+            </strong>
+
+        </div>
+
+
+        <div class="upload-progress-track">
+
+            <div
+                class="upload-progress-bar"
+                data-upload-bar
+            ></div>
+
+        </div>
+
+
+        <small data-upload-status>
+            Preparing upload...
+        </small>
+
+    </div>
+
+
+    <label class="check">
+
+        <input
+            type="checkbox"
+            name="is_published"
+            checked
+        >
+
+        Publish now
+
+    </label>
+
+
+    <button
+        class="admin-btn"
+        type="submit"
+        data-submit-button
+    >
+
+        Save Photo
+
+    </button>
+
+
+</form>
+
+
+{% endblock %}

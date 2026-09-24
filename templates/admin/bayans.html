@@ -1,0 +1,189 @@
+{% extends 'admin/base.html' %}
+
+
+{% block title %}
+Bayans | Admin
+{% endblock %}
+
+
+{% block heading %}
+Bayans
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="page-actions">
+
+    <a
+        class="admin-btn"
+        href="{{ url_for('admin.bayan_new') }}"
+    >
+
+        <i class="fa-solid fa-plus"></i>
+
+        Add Bayan
+
+    </a>
+
+</div>
+
+
+<div class="admin-table">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    Title
+                </th>
+
+                <th>
+                    Type
+                </th>
+
+                <th>
+                    Platform
+                </th>
+
+                <th>
+                    Status
+                </th>
+
+                <th>
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+            {% for item in items %}
+
+            <tr>
+
+
+                <td>
+
+                    <div class="table-title">
+
+                        {% if item.thumbnail %}
+
+                            <img
+                                src="{{ item.thumbnail if item.thumbnail.startswith('http') else media_url(item.thumbnail, 'bayans') }}"
+                                alt=""
+                            >
+
+                        {% endif %}
+
+
+                        <strong>
+                            {{ item.title }}
+                        </strong>
+
+                    </div>
+
+                </td>
+
+
+                <td>
+
+                    {% if item.upload_type == 'online' %}
+
+                        <span class="type-badge online">
+
+                            <i class="fa-solid fa-link"></i>
+
+                            Online
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="type-badge offline">
+
+                            <i class="fa-solid fa-file-video"></i>
+
+                            Offline
+
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+
+                <td>
+
+                    {{ item.platform or '—' }}
+
+                </td>
+
+
+                <td>
+
+                    <span class="status">
+
+                        {{ 'Published' if item.is_published else 'Draft' }}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <form
+                        method="post"
+                        action="{{ url_for('admin.bayan_delete', item_id=item.id) }}"
+                        onsubmit="return confirm('Delete this bayan?')"
+                    >
+
+                        {% include "_csrf.html" %}
+
+                        <button
+                            class="danger-link"
+                            type="submit"
+                        >
+                            Delete
+                        </button>
+
+                    </form>
+
+                </td>
+
+
+            </tr>
+
+
+            {% else %}
+
+            <tr>
+
+                <td
+                    colspan="5"
+                    class="empty-row"
+                >
+                    No Bayans yet.
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,482 @@
+{% extends 'admin/base.html' %}
+
+
+{% block title %}
+Add Bayan | Admin
+{% endblock %}
+
+
+{% block heading %}
+Add Bayan
+{% endblock %}
+
+
+{% block content %}
+
+
+<form
+    class="admin-form bayan-form"
+    id="bayanForm"
+    method="post"
+    enctype="multipart/form-data"
+    data-bayan-form
+>
+
+    {% include "_csrf.html" %}
+
+
+    <!-- =====================================================
+         TYPE
+    ====================================================== -->
+
+    <div class="form-section">
+
+        <div class="form-section-head">
+
+            <div>
+
+                <span class="eyebrow">
+                    CONTENT TYPE
+                </span>
+
+                <h2>
+                    Choose Bayan Type
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="type-switch">
+
+
+            <!-- ONLINE -->
+
+            <label class="type-option active">
+
+                <input
+                    type="radio"
+                    name="upload_type"
+                    value="online"
+                    checked
+                >
+
+                <span class="type-option-inner">
+
+                    <i class="fa-solid fa-link"></i>
+
+                    <span>
+
+                        <strong>
+                            Online
+                        </strong>
+
+                        <small>
+                            Social media / video link
+                        </small>
+
+                    </span>
+
+                </span>
+
+            </label>
+
+
+            <!-- OFFLINE -->
+
+            <label class="type-option">
+
+                <input
+                    type="radio"
+                    name="upload_type"
+                    value="upload"
+                >
+
+                <span class="type-option-inner">
+
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                    <span>
+
+                        <strong>
+                            Offline
+                        </strong>
+
+                        <small>
+                            Upload video from device
+                        </small>
+
+                    </span>
+
+                </span>
+
+            </label>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ONLINE BAYAN
+    ====================================================== -->
+
+    <section
+        class="bayan-mode"
+        id="onlineMode"
+    >
+
+        <div class="form-section">
+
+            <div class="form-section-head">
+
+                <div>
+
+                    <span class="eyebrow">
+                        ONLINE BAYAN
+                    </span>
+
+                    <h2>
+                        Video Details
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- PLATFORM -->
+
+            <label>
+
+                Platform
+
+                <select
+                    name="platform"
+                    id="platform"
+                >
+
+                    <option value="YouTube">
+                        YouTube
+                    </option>
+
+                    <option value="Facebook">
+                        Facebook
+                    </option>
+
+                    <option value="Instagram">
+                        Instagram
+                    </option>
+
+                    <option value="Other">
+                        Other Social Media
+                    </option>
+
+                </select>
+
+            </label>
+
+
+            <!-- VIDEO URL -->
+
+            <label>
+
+                Video URL
+
+                <div class="url-input-wrap">
+
+                    <i class="fa-solid fa-link"></i>
+
+                    <input
+                        type="url"
+                        name="video_url"
+                        id="videoUrl"
+                        placeholder="https://youtube.com/watch?v=..."
+                        autocomplete="off"
+                    >
+
+                    <span
+                        class="metadata-loader"
+                        id="metadataLoader"
+                    >
+
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                    </span>
+
+                </div>
+
+            </label>
+
+
+            <!-- METADATA STATUS -->
+
+            <div
+                class="metadata-status"
+                id="metadataStatus"
+            ></div>
+
+
+            <!-- =================================================
+                 VIDEO PREVIEW
+            ================================================== -->
+
+            <div
+                class="online-preview"
+                id="onlinePreview"
+            >
+
+                <div class="preview-image-wrap">
+
+                    <img
+                        id="previewThumbnail"
+                        src=""
+                        alt=""
+                    >
+
+                </div>
+
+
+                <div class="preview-content">
+
+                    <span
+                        class="preview-platform"
+                        id="previewPlatform"
+                    >
+                        YouTube
+                    </span>
+
+
+                    <h3 id="previewTitle">
+                        Video preview
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- THUMBNAIL URL -->
+
+            <input
+                type="hidden"
+                name="thumbnail"
+                id="thumbnail"
+            >
+
+
+            <!-- =================================================
+                 ONLINE TITLE
+            ================================================== -->
+
+            <label>
+
+                Title
+
+                <input
+                    type="text"
+                    name="title"
+                    id="onlineTitle"
+                    maxlength="35"
+                    minlength="1"
+                    required
+                    placeholder="Auto-loaded from video"
+                >
+
+                <small class="field-note">
+                    Maximum 35 characters.
+                </small>
+
+            </label>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         OFFLINE BAYAN
+    ====================================================== -->
+
+    <section
+        class="bayan-mode hidden"
+        id="offlineMode"
+        aria-hidden="true"
+    >
+
+        <div class="form-section">
+
+            <div class="form-section-head">
+
+                <div>
+
+                    <span class="eyebrow">
+                        OFFLINE BAYAN
+                    </span>
+
+                    <h2>
+                        Upload Video
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- OFFLINE TITLE -->
+
+            <label>
+
+                Title
+
+                <input
+                    type="text"
+                    name="offline_title"
+                    id="offlineTitle"
+                    maxlength="35"
+                    minlength="1"
+                    disabled
+                    required
+                    placeholder="Enter bayan title"
+                >
+
+                <small class="field-note">
+                    Maximum 35 characters.
+                </small>
+
+            </label>
+
+
+            <!-- VIDEO FILE -->
+
+            <label>
+
+                Video File
+
+                <input
+                    type="file"
+                    name="video_file"
+                    id="videoFile"
+                    accept="video/*"
+                    disabled
+                >
+
+                <small class="field-help">
+                    Upload a video from your computer or mobile device.
+                </small>
+
+            </label>
+
+
+            <!-- =================================================
+                 UPLOAD PROGRESS
+            ================================================== -->
+
+            <div
+                class="upload-progress"
+                id="uploadProgress"
+                hidden
+            >
+
+                <div class="progress-head">
+
+                    <span>
+                        Uploading video
+                    </span>
+
+                    <strong id="progressPercent">
+                        0%
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-bar"
+                        id="progressBar"
+                    ></div>
+
+                </div>
+
+
+                <small id="progressText">
+                    Ready to upload
+                </small>
+
+            </div>
+
+
+            <!-- THUMBNAIL -->
+
+            <label>
+
+                Thumbnail
+
+                <input
+                    type="file"
+                    name="thumbnail_file"
+                    id="thumbnailFile"
+                    accept="image/*"
+                    disabled
+                >
+
+            </label>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PUBLISH
+    ====================================================== -->
+
+    <div class="form-section publish-section">
+
+        <label class="check publish-check">
+
+            <input
+                type="checkbox"
+                name="is_published"
+                checked
+            >
+
+            <span>
+
+                <strong>
+                    Publish now
+                </strong>
+
+                <small>
+                    Make this bayan visible on the website.
+                </small>
+
+            </span>
+
+        </label>
+
+
+        <button
+            class="admin-btn save-bayan-btn"
+            type="submit"
+            data-submit-button
+        >
+
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+
+            Save Bayan
+
+        </button>
+
+    </div>
+
+
+</form>
+
+
+{% endblock %}

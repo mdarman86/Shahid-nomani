@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Articles | Shahid Nomani
+{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+
+    <div class="container">
+
+        <span class="eyebrow">
+            KNOWLEDGE
+        </span>
+
+        <h1>
+            Islamic Articles
+        </h1>
+
+        <p>
+            Read articles and reflections published through the official website.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="section articles-page-section">
+
+    <div class="container">
+
+        {% if articles %}
+
+        <div
+            class="articles-grid"
+            data-articles-list
+        >
+
+            {% for item in articles %}
+
+            <article
+                class="content-card article-post-card"
+                data-article-card
+            >
+
+                {% if item.image %}
+
+                <img
+                    src="{{ media_url(
+                        item.image,
+                        'articles'
+                    ) }}"
+                    alt="{{ item.title }}"
+                    loading="lazy"
+                >
+
+                {% endif %}
+
+
+                <div class="card-body">
+
+                    <span class="meta">
+                        Article
+                    </span>
+
+
+                    <h3>
+                        {{ item.title }}
+                    </h3>
+
+
+                    <div
+                        class="article-summary"
+                        data-article-summary
+                    >
+
+                        {{
+                            (
+                                item.summary
+                                or item.content
+                                or 'Read this article and explore more Islamic knowledge.'
+                            )
+                            |striptags
+                            |truncate(280, True)
+                        }}
+
+                    </div>
+
+
+                    <div
+                        class="article-full-content"
+                        data-article-content
+                        aria-hidden="true"
+                    >
+
+                        <div class="article-full-content-inner">
+
+                            {{
+                                (
+                                    item.content
+                                    or item.summary
+                                    or 'Read this article and explore more Islamic knowledge.'
+                                )
+                                |e
+                                |replace('\n', '<br>')
+                                |safe
+                            }}
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="article-read-more"
+                        aria-expanded="false"
+                        data-article-toggle
+                    >
+
+                        <span class="read-more-text">
+                            Read More
+                        </span>
+
+                        <i
+                            class="fa-solid fa-chevron-down"
+                            aria-hidden="true"
+                        ></i>
+
+                    </button>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+
+            <i class="fa-regular fa-newspaper"></i>
+
+            <h3>
+                No published articles yet
+            </h3>
+
+            <p>
+                Articles will appear here when they are published.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+{% endblock %}

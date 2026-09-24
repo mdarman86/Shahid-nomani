@@ -1,0 +1,143 @@
+{% extends 'admin/base.html' %}
+
+
+{% block heading %}
+Add Urdu Adab
+{% endblock %}
+
+
+{% block content %}
+
+
+<form
+    class="admin-form"
+    method="post"
+>
+
+    {% include "_csrf.html" %}
+
+
+    <!-- =================================================
+         CATEGORY
+    ================================================== -->
+
+    <label>
+
+        Category
+
+        <select name="category">
+
+            <option value="Shayari">
+                Shayari
+            </option>
+
+            <option value="Ghazal">
+                Ghazal
+            </option>
+
+            <option value="Poetry">
+                Poetry
+            </option>
+
+            <option value="Thought">
+                Thought
+            </option>
+
+            <option value="Other">
+                Other
+            </option>
+
+        </select>
+
+    </label>
+
+
+    <!-- =================================================
+         TITLE
+    ================================================== -->
+
+    <label>
+
+        Title
+
+        <input
+            type="text"
+            name="title"
+            maxlength="150"
+            required
+            placeholder="Enter title"
+        >
+
+    </label>
+
+
+    <!-- =================================================
+         SUMMARY
+    ================================================== -->
+
+    <label>
+
+        Short Summary
+
+        <textarea
+            name="summary"
+            rows="4"
+            maxlength="500"
+            placeholder="Write a short preview for this Urdu Adab..."
+        ></textarea>
+
+    </label>
+
+
+    <!-- =================================================
+         FULL CONTENT
+    ================================================== -->
+
+    <label>
+
+        Full Content
+
+        <textarea
+            name="content"
+            rows="14"
+            placeholder="Write the complete Urdu Adab content here..."
+        ></textarea>
+
+    </label>
+
+
+    <!-- =================================================
+         PUBLISH
+    ================================================== -->
+
+    <label class="check">
+
+        <input
+            type="checkbox"
+            name="is_published"
+            checked
+        >
+
+        Publish now
+
+    </label>
+
+
+    <!-- =================================================
+         SAVE
+    ================================================== -->
+
+    <button
+        class="admin-btn"
+        type="submit"
+    >
+
+        Save Adab
+
+    </button>
+
+
+</form>
+
+
+{% endblock %}

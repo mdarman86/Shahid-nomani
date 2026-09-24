@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Contact | Shahid Nomani
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- =====================================================
+     CONTACT PAGE HERO
+===================================================== -->
+
+<section class="page-hero">
+
+    <div class="container">
+
+        <span class="eyebrow">
+            CONTACT
+        </span>
+
+
+        <h1>
+            Send a Message
+        </h1>
+
+
+        <p>
+            For questions, feedback or website-related communication.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACT SECTION
+===================================================== -->
+
+<section class="section">
+
+    <div class="container contact-grid">
+
+
+        <!-- =================================================
+             CONTACT INFORMATION
+        ================================================== -->
+
+        <div>
+
+            <span class="eyebrow">
+                GET IN TOUCH
+            </span>
+
+
+            <h2>
+                We'd love to hear from you.
+            </h2>
+
+
+            <p>
+                Your message will be received by the website administration.
+            </p>
+
+
+            <!-- FACEBOOK -->
+
+            <div class="contact-item">
+
+                <i
+                    class="fa-brands fa-facebook-f"
+                    aria-hidden="true"
+                ></i>
+
+                <div>
+
+                    <strong>
+                        Facebook
+                    </strong>
+
+                    <a
+                        href="https://www.facebook.com/shahid.nomani.al.misbahi"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Shahid Nomani Al-Misbahi
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- INSTAGRAM -->
+
+            <div class="contact-item">
+
+                <i
+                    class="fa-brands fa-instagram"
+                    aria-hidden="true"
+                ></i>
+
+                <div>
+
+                    <strong>
+                        Instagram
+                    </strong>
+
+                    <a
+                        href="https://www.instagram.com/shahidnomani07/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        @shahidnomani07
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CONTACT FORM
+        ================================================== -->
+
+        <form
+            class="contact-form"
+            method="post"
+        >
+
+            {% include "_csrf.html" %}
+
+
+            <!-- NAME -->
+
+            <label>
+
+                Name
+
+                <input
+                    type="text"
+                    name="name"
+                    autocomplete="name"
+                    required
+                >
+
+            </label>
+
+
+            <!-- EMAIL -->
+
+            <label>
+
+                Email
+
+                <input
+                    type="email"
+                    name="email"
+                    autocomplete="email"
+                    required
+                >
+
+            </label>
+
+
+            <!-- MESSAGE -->
+
+            <label>
+
+                Message
+
+                <textarea
+                    name="message"
+                    rows="7"
+                    required
+                ></textarea>
+
+            </label>
+
+
+            <!-- SUBMIT -->
+
+            <button
+                class="btn btn-green"
+                type="submit"
+            >
+
+                Send Message
+
+                <i
+                    class="fa-solid fa-paper-plane"
+                    aria-hidden="true"
+                ></i>
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ book.title }} | Read Online
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-hero compact">
+
+    <div class="container">
+
+        <span class="eyebrow">
+            READING
+        </span>
+
+        <h1>
+            {{ book.title }}
+        </h1>
+
+        <p>
+            By {{ book.author or "Shahid Nomani" }}
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="container book-reader-page">
+
+
+        <!-- =================================================
+             READER HEADER
+        ================================================== -->
+
+        <div class="book-reader-header">
+
+            <div>
+
+                <span class="meta">
+                    {{ book.book_type|title }}
+                </span>
+
+                <h2>
+                    {{ book.title }}
+                </h2>
+
+                <p>
+                    By {{ book.author or "Shahid Nomani" }}
+                </p>
+
+            </div>
+
+
+            <a
+                class="btn btn-outline-dark"
+                href="{{ url_for('public.online_books') }}"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Books
+
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             PDF READER
+        ================================================== -->
+
+        {% if book.pdf %}
+
+        <div class="book-reader-frame">
+
+            <iframe
+                src="{{ url_for('public.book_pdf', book_id=book.id) }}#toolbar=1&navpanes=0&scrollbar=1"
+                title="{{ book.title }}"
+                loading="eager"
+                allow="fullscreen"
+            >
+            </iframe>
+
+
+            <object
+                data="{{ url_for('public.book_pdf', book_id=book.id) }}"
+                type="application/pdf"
+                aria-label="{{ book.title }}"
+            >
+
+                <div class="reader-fallback">
+
+                    <i class="fa-solid fa-file-pdf"></i>
+
+                    <h3>
+                        PDF preview is not supported in this browser
+                    </h3>
+
+                    <p>
+                        You can open the book directly in a new tab.
+                    </p>
+
+
+                    <a
+                        class="btn btn-green"
+                        href="{{ url_for('public.book_pdf', book_id=book.id) }}"
+                        target="_blank"
+                        rel="noopener"
+                    >
+
+                        Open Book
+
+                        <i class="fa-solid fa-up-right-from-square"></i>
+
+                    </a>
+
+                </div>
+
+            </object>
+
+        </div>
+
+
+        <!-- =================================================
+             READER ACTIONS
+        ================================================== -->
+
+        <div class="book-reader-actions">
+
+
+            <a
+                class="btn btn-green"
+                href="{{ url_for('public.book_pdf', book_id=book.id) }}"
+                target="_blank"
+                rel="noopener"
+            >
+
+                Open Book
+
+                <i class="fa-solid fa-up-right-from-square"></i>
+
+            </a>
+
+
+            <a
+                class="btn btn-outline-dark"
+                href="{{ url_for('public.book_pdf_download', book_id=book.id) }}"
+            >
+
+                Download PDF
+
+                <i class="fa-solid fa-download"></i>
+
+            </a>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- =================================================
+             NO FILE
+        ================================================== -->
+
+        <div class="empty-state">
+
+            <i class="fa-solid fa-file-circle-xmark"></i>
+
+            <h3>
+                Book file is not available
+            </h3>
+
+            <p>
+                This book cannot be opened online at the moment.
+            </p>
+
+
+            <a
+                class="btn btn-outline-dark"
+                href="{{ url_for('public.online_books') }}"
+            >
+
+                Back to Books
+
+            </a>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+{% endblock %}

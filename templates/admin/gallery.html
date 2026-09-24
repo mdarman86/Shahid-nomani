@@ -1,0 +1,86 @@
+{% extends 'admin/base.html' %}
+
+
+{% block heading %}
+Gallery
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="page-actions">
+
+    <a
+        class="admin-btn"
+        href="{{ url_for('admin.gallery_new') }}"
+    >
+
+        <i class="fa-solid fa-plus"></i>
+
+        Add Photo
+
+    </a>
+
+</div>
+
+
+<div class="admin-gallery">
+
+
+    {% for item in items %}
+
+    <div class="gallery-admin-card">
+
+
+        <div class="gallery-image-wrap">
+
+            <img
+                src="{{ media_url(item.image, 'gallery') }}"
+                alt="{{ item.caption or 'Gallery photo' }}"
+            >
+
+        </div>
+
+
+        <span>
+
+            {{ item.caption or 'Gallery photo' }}
+
+        </span>
+
+
+        <form
+            method="post"
+            action="{{ url_for('admin.gallery_delete', item_id=item.id) }}"
+            onsubmit="return confirm('Delete this photo?')"
+        >
+
+            {% include "_csrf.html" %}
+
+            <button
+                class="danger-link"
+                type="submit"
+            >
+                Delete
+            </button>
+
+        </form>
+
+
+    </div>
+
+
+    {% else %}
+
+    <div class="empty-row">
+        No photos yet.
+    </div>
+
+    {% endfor %}
+
+
+</div>
+
+
+{% endblock %}

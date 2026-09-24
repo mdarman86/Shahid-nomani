@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Urdu Adab | Shahid Nomani
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- =====================================================
+     PAGE HERO
+===================================================== -->
+
+<section class="page-hero">
+
+    <div class="container">
+
+        <span class="eyebrow">
+            URDU LITERATURE
+        </span>
+
+        <h1>
+            Urdu Adab
+        </h1>
+
+        <p>
+            Shayari, ghazal, poetry and other literary work.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ADAB
+===================================================== -->
+
+<section class="section">
+
+    <div class="container">
+
+
+        {% if items %}
+
+
+        <!-- =================================================
+             CATEGORY-WISE SECTIONS
+        ================================================== -->
+
+        {% for category, category_items in
+            items|groupby('category') %}
+
+
+        <div class="adab-category-section">
+
+
+            <!-- =================================================
+                 CATEGORY HEADING
+            ================================================== -->
+
+            <div class="section-head">
+
+                <div>
+
+                    <span class="eyebrow">
+                        URDU ADAB
+                    </span>
+
+                    <h2>
+                        {{ category or 'Other' }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CATEGORY CARDS
+            ================================================== -->
+
+            <div class="card-grid articles-grid">
+
+
+                {% for item in category_items %}
+
+
+                <article
+                    class="content-card article-post-card adab-post-card"
+                    data-article-card
+                >
+
+
+                    <!-- =================================================
+                         IMAGE
+                    ================================================== -->
+
+                    {% if item.image %}
+
+                    <img
+                        src="{{ media_url(
+                            item.image,
+                            'adab'
+                        ) }}"
+                        alt="{{ item.title }}"
+                        loading="lazy"
+                    >
+
+                    {% endif %}
+
+
+                    <!-- =================================================
+                         CARD BODY
+                    ================================================== -->
+
+                    <div class="card-body">
+
+
+                        <span class="meta">
+                            {{ item.category or 'Other' }}
+                        </span>
+
+
+                        <h3>
+                            {{ item.title }}
+                        </h3>
+
+
+                        <!-- =================================================
+                             SUMMARY / PREVIEW
+                        ================================================== -->
+
+                        <p class="article-summary">
+
+                            {{ item.summary or
+                            'Explore this Urdu literary work and read the complete piece.' }}
+
+                        </p>
+
+
+                        <!-- =================================================
+                             FULL CONTENT
+                        ================================================== -->
+
+                        <div
+                            class="article-full-content"
+                            data-article-content
+                            aria-hidden="true"
+                        >
+
+                            <div class="article-full-content-inner">
+
+
+                                {% if item.content %}
+
+                                <div class="rich-text">
+
+                                    {{
+                                        item.content
+                                        |e
+                                        |replace('\n', '<br>')
+                                        |safe
+                                    }}
+
+                                </div>
+
+                                {% elif item.summary %}
+
+                                <div class="rich-text">
+
+                                    {{
+                                        item.summary
+                                        |e
+                                        |replace('\n', '<br>')
+                                        |safe
+                                    }}
+
+                                </div>
+
+                                {% else %}
+
+                                <p>
+                                    This Urdu literary work is
+                                    currently available without
+                                    additional description.
+                                </p>
+
+                                {% endif %}
+
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             READ MORE / READ LESS
+                        ================================================== -->
+
+                        <button
+                            type="button"
+                            class="article-read-more"
+                            data-article-toggle
+                            aria-expanded="false"
+                        >
+
+                            <span class="read-more-text">
+                                Read More
+                            </span>
+
+                            <i class="fa-solid fa-chevron-down"></i>
+
+                        </button>
+
+
+                    </div>
+
+
+                </article>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+        {% else %}
+
+
+        <!-- =================================================
+             EMPTY STATE
+        ================================================== -->
+
+        <div class="empty-state">
+
+            <i class="fa-solid fa-feather"></i>
+
+            <h3>
+                No published Urdu Adab yet
+            </h3>
+
+            <p>
+                Urdu literature will appear here when published.
+            </p>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}

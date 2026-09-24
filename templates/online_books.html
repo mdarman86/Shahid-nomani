@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Read Online | Books | Shahid Nomani
+{% endblock %}
+
+{% block content %}
+
+
+<section class="page-hero">
+
+    <div class="container">
+
+        <span class="eyebrow">
+            DIGITAL LIBRARY
+        </span>
+
+        <h1>
+            Read Online
+        </h1>
+
+        <p>
+            Read published books online from the digital library.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div>
+
+                <span class="eyebrow">
+                    BOOK COLLECTION
+                </span>
+
+                <h2>
+                    Online Books
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="card-grid">
+
+            {% for book in books %}
+
+            <article class="content-card book-card">
+
+                {% if book.image %}
+
+                <img
+                    src="{{ media_url(book.image, 'books') }}"
+                    alt="{{ book.title }}"
+                >
+
+                {% else %}
+
+                <img
+                    src="{{ url_for('static', filename='images/branding/book.png') }}"
+                    alt="{{ book.title }}"
+                >
+
+                {% endif %}
+
+
+                <div class="card-body">
+
+                    <span class="meta">
+                        Read Online
+                    </span>
+
+                    <h3>
+                        {{ book.title }}
+                    </h3>
+
+                    <p>
+                        By {{ book.author }}
+                    </p>
+
+
+                    <a
+                        class="btn btn-green"
+                        href="{{ url_for('public.book_reader', book_id=book.id) }}"
+                    >
+                        Read Online
+                        <i class="fa-solid fa-book-open"></i>
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            {% else %}
+
+            <div class="empty-state">
+
+                <i class="fa-solid fa-book-open"></i>
+
+                <h3>
+                    No online books yet
+                </h3>
+
+                <p>
+                    Books available for online reading will appear here.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

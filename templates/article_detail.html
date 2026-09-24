@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ article.title }} | Shahid Nomani
+{% endblock %}
+
+{% block content %}
+
+<section class="page-hero compact">
+
+    <div class="container">
+
+        <span class="eyebrow">
+            ARTICLE
+        </span>
+
+        <h1>
+            {{ article.title }}
+        </h1>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="container article-layout">
+
+        <article class="article-content">
+
+            {% if article.image %}
+
+            <img
+                class="article-cover"
+                src="{{ media_url(article.image, 'articles') }}"
+                alt="{{ article.title }}"
+            >
+
+            {% endif %}
+
+
+            {% if article.summary %}
+
+            <p class="lead">
+                {{ article.summary }}
+            </p>
+
+            {% endif %}
+
+
+            {% if article.content %}
+
+            <div class="rich-text">
+
+                {{ article.content
+                   |replace('\n', '<br>')
+                   |safe
+                }}
+
+            </div>
+
+            {% endif %}
+
+
+            <div
+                class="detail-actions"
+                style="margin-top: 32px;"
+            >
+
+                <a
+                    class="text-link"
+                    href="{{ url_for('public.articles') }}"
+                >
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Articles
+
+                </a>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+{% endblock %}

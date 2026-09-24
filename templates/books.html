@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}
+Books | Shahid Nomani
+{% endblock %}
+
+{% block content %}
+
+<section class="section section-soft">
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div>
+                <span class="eyebrow">
+                    PUBLICATIONS
+                </span>
+
+                <h1>
+                    Books
+                </h1>
+
+                <p>
+                    Browse the latest books and publications.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="card-grid">
+
+            {% for book in books %}
+
+            <article class="content-card">
+
+                {% if book.image %}
+
+                <img
+                    src="{{ media_url(book.image, 'books') }}"
+                    alt="{{ book.title }}"
+                >
+
+                {% else %}
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/branding/book.png'
+                    ) }}"
+                    alt="{{ book.title }}"
+                >
+
+                {% endif %}
+
+
+                <div class="card-body">
+
+                    {% if book.book_type in [
+                        'online',
+                        'read',
+                        'read_online',
+                        'digital'
+                    ] %}
+
+                    <span class="meta">
+                        Read Online
+                    </span>
+
+                    {% elif book.book_type in [
+                        'order',
+                        'sell',
+                        'buy',
+                        'delivery'
+                    ] %}
+
+                    <span class="meta">
+                        Buy Book
+                    </span>
+
+                    {% else %}
+
+                    <span class="meta">
+                        Book
+                    </span>
+
+                    {% endif %}
+
+
+                    <h3>
+                        {{ book.title }}
+                    </h3>
+
+
+                    {% if book.author %}
+
+                    <p>
+                        By {{ book.author }}
+                    </p>
+
+                    {% endif %}
+
+
+                    {% if book.description %}
+
+                    <p>
+                        {{ book.description }}
+                    </p>
+
+                    {% endif %}
+
+
+                    {% if book.book_type in [
+                        'online',
+                        'read',
+                        'read_online',
+                        'digital'
+                    ] %}
+
+                    <a
+                        class="btn btn-green"
+                        href="{{ url_for(
+                            'public.book_reader',
+                            book_id=book.id
+                        ) }}"
+                    >
+                        Read Online
+                        <i class="fa-solid fa-book-open"></i>
+                    </a>
+
+
+                    {% elif book.book_type in [
+                        'order',
+                        'sell',
+                        'buy',
+                        'delivery'
+                    ] %}
+
+                    <a
+                        class="btn btn-gold"
+                        href="{{ url_for(
+                            'public.book_detail',
+                            book_id=book.id
+                        ) }}"
+                    >
+                        Buy Book
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+            {% else %}
+
+            <div class="empty-state">
+
+                <i class="fa-solid fa-book-open"></i>
+
+                <h3>
+                    Books not available
+                </h3>
+
+                <p>
+                    Books will appear here when they are published.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

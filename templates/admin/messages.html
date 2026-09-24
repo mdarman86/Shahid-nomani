@@ -1,0 +1,111 @@
+{% extends 'admin/base.html' %}
+
+
+{% block heading %}
+Messages
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="message-list">
+
+
+    {% for item in items %}
+
+
+    <article class="message-card">
+
+
+        <div class="message-head">
+
+            <div>
+
+                <strong>
+                    {{ item.name }}
+                </strong>
+
+                <span>
+                    {{ item.email }}
+                </span>
+
+            </div>
+
+
+            <span class="status">
+
+                {{ item.status }}
+
+            </span>
+
+        </div>
+
+
+        <p>
+            {{ item.message }}
+        </p>
+
+
+        <form
+            method="post"
+            action="{{ url_for('admin.message_reply', item_id=item.id) }}"
+        >
+
+            {% include "_csrf.html" %}
+
+            <textarea
+                name="reply"
+                rows="3"
+                placeholder="Write a reply..."
+            >{{ item.reply or '' }}</textarea>
+
+
+            <button
+                class="admin-btn"
+                type="submit"
+            >
+
+                Save Reply
+
+            </button>
+
+        </form>
+
+
+        <form
+            method="post"
+            action="{{ url_for('admin.message_delete', item_id=item.id) }}"
+            onsubmit="return confirm('Delete this message?')"
+        >
+
+            {% include "_csrf.html" %}
+
+            <button
+                class="danger-link"
+                type="submit"
+            >
+                Delete
+            </button>
+
+        </form>
+
+
+    </article>
+
+
+    {% else %}
+
+
+    <div class="empty-row">
+        No messages yet.
+    </div>
+
+
+    {% endfor %}
+
+
+</div>
+
+
+{% endblock %}

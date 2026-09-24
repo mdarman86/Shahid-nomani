@@ -1,0 +1,207 @@
+{% extends 'admin/base.html' %}
+
+
+{% block heading %}
+Add Book
+{% endblock %}
+
+
+{% block content %}
+
+
+<form
+    class="admin-form book-form upload-form"
+    method="post"
+    enctype="multipart/form-data"
+    data-book-form
+    data-upload-form
+>
+
+    {% include "_csrf.html" %}
+
+
+    <label>
+
+        Book Type
+
+        <select
+            name="book_type"
+            id="bookType"
+            data-book-type
+        >
+
+            <option value="read">
+                Read Online
+            </option>
+
+            <option value="order">
+                Sell / Delivery
+            </option>
+
+        </select>
+
+    </label>
+
+
+    <label>
+
+        Title
+
+        <input
+            type="text"
+            name="title"
+            maxlength="150"
+            required
+            placeholder="Enter book title"
+        >
+
+    </label>
+
+
+    <label>
+
+        Author
+
+        <input
+            type="text"
+            name="author"
+            value="Shahid Nomani"
+            maxlength="120"
+            required
+            placeholder="Author name"
+        >
+
+    </label>
+
+
+    <div
+        class="book-field"
+        data-sell-field
+        hidden
+    >
+
+        <label>
+
+            Price (₹)
+
+            <input
+                type="number"
+                name="price"
+                min="0"
+                step="1"
+                placeholder="Enter price in INR"
+            >
+
+        </label>
+
+    </div>
+
+
+    <label>
+
+        Cover Image
+
+        <input
+            type="file"
+            name="image"
+            accept="image/*"
+            required
+            data-upload-input
+        >
+
+        <small class="field-help">
+            Upload the book cover image.
+        </small>
+
+    </label>
+
+
+    <div
+        class="book-field"
+        data-read-field
+    >
+
+        <label>
+
+            Book PDF
+
+            <input
+                type="file"
+                name="pdf"
+                accept="application/pdf,.pdf"
+                data-pdf-input
+            >
+
+            <small class="field-help">
+                Upload the PDF for online reading.
+            </small>
+
+        </label>
+
+    </div>
+
+
+    <div
+        class="upload-progress"
+        data-upload-progress
+        hidden
+    >
+
+        <div class="upload-progress-head">
+
+            <span data-upload-label>
+                Uploading files
+            </span>
+
+            <strong data-upload-percent>
+                0%
+            </strong>
+
+        </div>
+
+
+        <div class="upload-progress-track">
+
+            <div
+                class="upload-progress-bar"
+                data-upload-bar
+            ></div>
+
+        </div>
+
+
+        <small data-upload-status>
+            Preparing upload...
+        </small>
+
+    </div>
+
+
+    <label class="check">
+
+        <input
+            type="checkbox"
+            name="is_published"
+            checked
+        >
+
+        Publish now
+
+    </label>
+
+
+    <button
+        class="admin-btn"
+        type="submit"
+        data-submit-button
+    >
+
+        Save Book
+
+    </button>
+
+
+</form>
+
+
+{% endblock %}

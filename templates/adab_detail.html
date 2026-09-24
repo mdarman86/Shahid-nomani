@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ item.title }} | Shahid Nomani
+{% endblock %}
+
+{% block content %}
+
+<section class="page-hero compact">
+
+    <div class="container">
+
+        <span class="eyebrow">
+            {{ item.category }}
+        </span>
+
+        <h1>
+            {{ item.title }}
+        </h1>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="container article-content urdu-content">
+
+        {% if item.image %}
+
+        <img
+            class="article-cover"
+            src="{{ media_url(item.image, 'adab') }}"
+            alt=""
+        >
+
+        {% endif %}
+
+
+        <p>
+            {{ item.summary }}
+        </p>
+
+
+        <div class="rich-text">
+
+            {{ item.content|replace('\n', '<br>')|safe }}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

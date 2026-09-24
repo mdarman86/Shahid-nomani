@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Gallery | Shahid Nomani
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- =====================================================
+     PAGE HERO
+===================================================== -->
+
+<section class="page-hero">
+
+    <div class="container">
+
+        <span class="eyebrow">
+            MEMORIES
+        </span>
+
+        <h1>
+            Gallery
+        </h1>
+
+        <p>
+            Selected photographs from events and memories.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GALLERY
+===================================================== -->
+
+<section class="section">
+
+    <div class="container">
+
+
+        {% if items %}
+
+
+        <div class="gallery-grid large">
+
+
+            {% for item in items %}
+
+
+            <figure>
+
+
+                <img
+                    src="{{ media_url(
+                        item.image,
+                        'gallery'
+                    ) }}"
+                    alt="{{ item.caption or 'Gallery photo' }}"
+                    loading="lazy"
+                >
+
+
+                {% if item.caption %}
+
+                <figcaption>
+
+                    {{ item.caption }}
+
+                </figcaption>
+
+                {% endif %}
+
+
+            </figure>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- =================================================
+             EMPTY STATE
+        ================================================== -->
+
+        <div class="empty-state">
+
+            <i class="fa-regular fa-image"></i>
+
+            <h3>
+                No gallery photos yet
+            </h3>
+
+            <p>
+                Gallery photos will appear here when published.
+            </p>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}

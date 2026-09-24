@@ -1,0 +1,222 @@
+<footer class="site-footer">
+
+    <div class="container footer-grid">
+
+
+        <!-- ================================================= -->
+        <!-- BRAND -->
+        <!-- ================================================= -->
+
+        <div class="footer-brand">
+
+            <img
+                src="{{ url_for('static', filename='images/branding/logo.jpg') }}"
+                alt="Shahid Nomani Al-Misbahi"
+            >
+
+            <div>
+
+                <h3>
+                    Shahid Nomani Al-Misbahi
+                </h3>
+
+                <p>
+                    قرآن و سنت کی روشنی عام کریں
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- EXPLORE -->
+        <!-- ================================================= -->
+
+        <div>
+
+            <h4>
+                Explore
+            </h4>
+
+
+            <a href="{{ url_for('public.articles') }}">
+                Articles
+            </a>
+
+
+            <a href="{{ url_for('public.bayans') }}">
+                Bayans
+            </a>
+
+
+            <a href="{{ url_for('public.books') }}">
+                Books
+            </a>
+
+
+            <a href="{{ url_for('public.adab') }}">
+                Urdu Adab
+            </a>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- CONNECT -->
+        <!-- ================================================= -->
+
+        <div>
+
+            <h4>
+                Connect
+            </h4>
+
+
+            {% if social_links.facebook %}
+
+                <a
+                    href="{{ social_links.facebook }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <i class="fa-brands fa-facebook-f"></i>
+                    Facebook
+                </a>
+
+            {% endif %}
+
+
+            {% if social_links.instagram %}
+
+                <a
+                    href="{{ social_links.instagram }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <i class="fa-brands fa-instagram"></i>
+                    Instagram
+                </a>
+
+            {% endif %}
+
+
+            {% if social_links.youtube %}
+
+                <a
+                    href="{{ social_links.youtube }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <i class="fa-brands fa-youtube"></i>
+                    YouTube
+                </a>
+
+            {% endif %}
+
+
+            {% if social_links.telegram %}
+
+                <a
+                    href="{{ social_links.telegram }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <i class="fa-brands fa-telegram"></i>
+                    Telegram
+                </a>
+
+            {% endif %}
+
+
+            {% if social_links.whatsapp %}
+
+                <a
+                    href="{{ social_links.whatsapp }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <i class="fa-brands fa-whatsapp"></i>
+                    WhatsApp
+                </a>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- WEBSITE -->
+        <!-- ================================================= -->
+
+        <div>
+
+            <h4>
+                Website
+            </h4>
+
+
+            <p>
+                Official website of Shahid Nomani Al-Misbahi.
+            </p>
+
+
+            <a
+                class="footer-contact"
+                href="{{ url_for('public.contact') }}"
+            >
+
+                Send a Message
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- FOOTER BOTTOM -->
+    <!-- ================================================= -->
+
+    <div class="footer-bottom">
+
+        <div class="container">
+
+
+            <span>
+                © 2026 Shahid Nomani Al-Misbahi
+            </span>
+
+
+            <span class="footer-credit">
+
+                Designed &amp; Developed by Md Arman
+
+
+<!-- =================================================
+                    href="https://.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Vercel
+                </a>
+=============================================== -->
+
+
+            </span>
+
+
+            <a
+                href="{{ url_for('admin.login') }}"
+            >
+                Click Only for Admin Login
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>

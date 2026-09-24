@@ -1,0 +1,152 @@
+{% extends 'admin/base.html' %}
+
+
+{% block heading %}
+Books
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="page-actions">
+
+    <a
+        class="admin-btn"
+        href="{{ url_for('admin.book_new') }}"
+    >
+
+        <i class="fa-solid fa-plus"></i>
+
+        Add Book
+
+    </a>
+
+</div>
+
+
+<div class="admin-table">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    Title
+                </th>
+
+                <th>
+                    Author
+                </th>
+
+                <th>
+                    Type
+                </th>
+
+                <th>
+                    Price
+                </th>
+
+                <th>
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+            {% for item in items %}
+
+            <tr>
+
+                <td>
+                    {{ item.title }}
+                </td>
+
+                <td>
+                    {{ item.author }}
+                </td>
+
+                <td>
+
+                    {% if item.book_type == 'read' %}
+
+                        <span class="type-badge online">
+                            Read Online
+                        </span>
+
+                    {% else %}
+
+                        <span class="type-badge offline">
+                            Sell / Delivery
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+
+                <td>
+
+                    {% if item.price %}
+                        ₹{{ item.price }}
+                    {% else %}
+                        —
+                    {% endif %}
+
+                </td>
+
+
+                <td>
+
+                    <form
+                        method="post"
+                        action="{{ url_for('admin.book_delete', item_id=item.id) }}"
+                        onsubmit="return confirm('Delete this book?')"
+                    >
+
+                        {% include "_csrf.html" %}
+
+                        <button
+                            class="danger-link"
+                            type="submit"
+                        >
+                            Delete
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+
+            {% else %}
+
+            <tr>
+
+                <td
+                    colspan="5"
+                    class="empty-row"
+                >
+                    No books yet.
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+{% endblock %}

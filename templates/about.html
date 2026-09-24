@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}
+About | Shahid Nomani
+{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+
+    <div class="container">
+
+        <span class="eyebrow">
+            ABOUT
+        </span>
+
+        <h1>
+            Shahid Nomani Al-Misbahi
+        </h1>
+
+        <p>
+            Knowledge, faith and wisdom through Quran, Sunnah and beneficial literature.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="container two-col about-grid">
+
+        <div class="image-card">
+
+            <img
+                src="{{ url_for('static', filename='images/branding/scholar.jpg') }}"
+                alt="Shahid Nomani Al-Misbahi"
+            >
+
+        </div>
+
+
+        <div>
+
+            <span class="eyebrow">
+                THE SCHOLAR
+            </span>
+
+            <h2>
+                Sharing beneficial knowledge
+            </h2>
+
+            <p>
+                Shahid Nomani Al-Misbahi is presented through this official website as an Islamic scholar, author and researcher. The website brings together his articles, Bayans, books, Urdu literature and selected photographs.
+            </p>
+
+            <p>
+                He is associated with Al Jamiatul Ashrafia, Mubarakpur, Azamgarh, Uttar Pradesh.
+            </p>
+
+
+            <div class="info-list">
+
+                <div>
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+
+                    <span>
+                        <strong>
+                            Education
+                        </strong>
+
+                        Al Jamiatul Ashrafia, Mubarakpur
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                    <span>
+                        <strong>
+                            Publication
+                        </strong>
+
+                        Yam Ba Yam and other works
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <i class="fa-solid fa-microphone-lines"></i>
+
+                    <span>
+                        <strong>
+                            Content
+                        </strong>
+
+                        Articles, Bayans and Urdu Adab
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

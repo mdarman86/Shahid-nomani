@@ -1,0 +1,259 @@
+{% extends 'admin/base.html' %}
+
+
+{% block title %}
+    Articles | Admin
+{% endblock %}
+
+
+{% block heading %}
+    Articles
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- =====================================================
+     ARTICLES PAGE
+====================================================== -->
+
+<section class="admin-section">
+
+    <!-- =================================================
+         PAGE ACTIONS
+    ================================================== -->
+
+    <div class="admin-page-actions">
+
+        <a
+            class="admin-btn"
+            href="{{ url_for('admin.article_new') }}"
+        >
+
+            <i class="fa-solid fa-plus"></i>
+
+            Add Article
+
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         ARTICLES LIST
+    ================================================== -->
+
+    {% if items %}
+
+        <div class="admin-table-wrap">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            TITLE
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            DATE
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for item in items %}
+
+                    <tr>
+
+
+                        <!-- TITLE -->
+
+                        <td>
+
+                            <div class="admin-item-title">
+
+                                {% if item.image %}
+
+                                <img
+                                    src="{{ media_url(
+                                        item.image,
+                                        'articles'
+                                    ) }}"
+                                    alt="{{ item.title }}"
+                                >
+
+                                {% endif %}
+
+
+                                <div>
+
+                                    <strong>
+                                        {{ item.title }}
+                                    </strong>
+
+
+                                    {% if item.summary %}
+
+                                    <small>
+                                        {{ item.summary | striptags | truncate(
+                                            100,
+                                            True
+                                        ) }}
+                                    </small>
+
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- STATUS -->
+
+                        <td>
+
+                            {% if item.is_published %}
+
+                                <span class="status published">
+                                    Published
+                                </span>
+
+                            {% else %}
+
+                                <span class="status draft">
+                                    Draft
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- DATE -->
+
+                        <td>
+
+                            {% if item.created_at %}
+
+                                {{ item.created_at.strftime(
+                                    '%d %b %Y'
+                                ) }}
+
+                            {% else %}
+
+                                —
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- ACTION -->
+
+                        <td>
+
+                            <form
+                                method="post"
+                                action="{{ url_for(
+                                    'admin.article_delete',
+                                    item_id=item.id
+                                ) }}"
+                                onsubmit="return confirm(
+                                    'Are you sure you want to delete this article?'
+                                );"
+                            >
+
+                                {% include "_csrf.html" %}
+
+                                <button
+                                    type="submit"
+                                    class="admin-delete-btn"
+                                >
+
+                                    <i class="fa-regular fa-trash-can"></i>
+
+                                    Delete
+
+                                </button>
+
+                            </form>
+
+                        </td>
+
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    {% else %}
+
+
+        <!-- =================================================
+             EMPTY STATE
+        ================================================== -->
+
+        <div class="admin-empty-state">
+
+            <div class="admin-empty-icon">
+
+                <i class="fa-regular fa-newspaper"></i>
+
+            </div>
+
+
+            <h2>
+                No articles yet
+            </h2>
+
+
+            <p>
+                Add your first article to publish it on the website.
+            </p>
+
+
+            <a
+                class="admin-btn"
+                href="{{ url_for('admin.article_new') }}"
+            >
+
+                <i class="fa-solid fa-plus"></i>
+
+                Add Article
+
+            </a>
+
+        </div>
+
+
+    {% endif %}
+
+
+</section>
+
+
+{% endblock %}

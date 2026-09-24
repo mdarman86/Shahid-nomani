@@ -1,0 +1,163 @@
+{% extends 'admin/base.html' %}
+
+
+{% block title %}
+    Add Article | Admin
+{% endblock %}
+
+
+{% block heading %}
+    Add Article
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- =====================================================
+     ADD ARTICLE FORM
+====================================================== -->
+
+<section class="admin-section">
+
+    <form
+        class="admin-form"
+        method="post"
+    >
+
+        {% include "_csrf.html" %}
+
+
+        <!-- =================================================
+             TITLE
+        ================================================== -->
+
+        <label>
+
+            Title
+
+            <input
+                type="text"
+                name="title"
+                maxlength="120"
+                required
+                placeholder="Enter article title"
+            >
+
+            <small class="field-help">
+
+                Maximum 120 characters.
+
+            </small>
+
+        </label>
+
+
+        <!-- =================================================
+             SHORT SUMMARY
+        ================================================== -->
+
+        <label>
+
+            Short Summary
+
+            <textarea
+                name="summary"
+                rows="4"
+                maxlength="300"
+                placeholder="Write a short summary of the article"
+            ></textarea>
+
+            <small class="field-help">
+
+                Maximum 300 characters.
+
+            </small>
+
+        </label>
+
+
+        <!-- =================================================
+             ARTICLE CONTENT
+        ================================================== -->
+
+        <label>
+
+            Article Content
+
+            <textarea
+                name="content"
+                rows="16"
+                required
+                placeholder="Write the complete article here..."
+            ></textarea>
+
+            <small class="field-help">
+
+                Write the complete article content.
+                You can use multiple paragraphs.
+
+            </small>
+
+        </label>
+
+
+        <!-- =================================================
+             PUBLISH
+        ================================================== -->
+
+        <label class="check">
+
+            <input
+                type="checkbox"
+                name="is_published"
+                checked
+            >
+
+            <span>
+                Publish now
+            </span>
+
+        </label>
+
+
+        <!-- =================================================
+             ACTIONS
+        ================================================== -->
+
+        <div class="admin-form-actions">
+
+
+            <a
+                class="admin-btn secondary"
+                href="{{ url_for('admin.articles') }}"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Articles
+
+            </a>
+
+
+            <button
+                class="admin-btn"
+                type="submit"
+            >
+
+                <i class="fa-solid fa-check"></i>
+
+                Save Article
+
+            </button>
+
+
+        </div>
+
+
+    </form>
+
+</section>
+
+
+{% endblock %}

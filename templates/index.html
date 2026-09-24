@@ -1,0 +1,960 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Home | Shahid Nomani
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- =====================================================
+     HERO / HOME
+===================================================== -->
+
+<section
+    class="hero"
+    id="home"
+    style="
+        background-image:
+        linear-gradient(
+            90deg,
+            rgba(5,35,26,.88),
+            rgba(5,35,26,.48)
+        ),
+        url('{{ url_for(
+            'static',
+            filename='images/branding/new-hero-bg.png'
+        ) }}');
+    "
+>
+
+    <div class="container hero-inner">
+
+        <span class="eyebrow">
+            OFFICIAL WEBSITE
+        </span>
+
+
+        <h1>
+
+            Spreading the Light of
+
+            <br>
+
+            <span>
+                Quran & Sunnah
+            </span>
+
+        </h1>
+
+
+        <p>
+            قرآن و سنت کی روشنی سے اپنی سوچ اور زندگی کو روشن کریں۔
+        </p>
+
+
+        <div class="hero-actions">
+
+            <a
+                class="btn btn-gold"
+                href="{{ url_for('public.bayans') }}"
+            >
+
+                Watch Bayan
+
+                <i
+                    class="fa-solid fa-play"
+                    aria-hidden="true"
+                ></i>
+
+            </a>
+
+
+            <a
+                class="btn btn-outline"
+                href="{{ url_for('public.online_books') }}"
+            >
+
+                Read Books
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SCHOLAR / ABOUT
+===================================================== -->
+
+<section
+    class="section scholar-section"
+    id="about"
+>
+
+    <div class="container two-col">
+
+        <div class="image-card">
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='images/branding/scholar.jpg'
+                ) }}"
+                alt="Shahid Nomani Al-Misbahi"
+            >
+
+        </div>
+
+
+        <div>
+
+            <span class="eyebrow">
+                ABOUT THE SCHOLAR
+            </span>
+
+
+            <h2>
+                Shahid Nomani Al-Misbahi
+            </h2>
+
+
+            <p>
+                Islamic scholar, author and researcher, with a focus on
+                sharing beneficial knowledge through Quran, Sunnah,
+                lectures, books and Urdu literature.
+            </p>
+
+
+            <p>
+                Student of Al Jamiatul Ashrafia, Mubarakpur,
+                Azamgarh, Uttar Pradesh.
+            </p>
+
+
+            <a
+                class="text-link"
+                href="{{ url_for('public.about') }}"
+            >
+
+                Read More
+
+                <i
+                    class="fa-solid fa-arrow-right"
+                    aria-hidden="true"
+                ></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ARTICLES
+===================================================== -->
+
+{% if latest_articles %}
+
+<section
+    class="section section-soft"
+    id="articles"
+>
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div>
+
+                <span class="eyebrow">
+                    KNOWLEDGE
+                </span>
+
+
+                <h2>
+                    Latest Articles
+                </h2>
+
+            </div>
+
+
+            <a
+                class="text-link"
+                href="{{ url_for('public.articles') }}"
+            >
+
+                View All
+
+                <i
+                    class="fa-solid fa-arrow-right"
+                    aria-hidden="true"
+                ></i>
+
+            </a>
+
+        </div>
+
+
+        <div class="card-grid home-latest-grid home-articles-grid">
+
+            {% for item in latest_articles %}
+
+            <article
+                class="content-card home-latest-card home-article-card"
+            >
+
+                {% if item.image %}
+
+                <img
+                    src="{{ media_url(
+                        item.image,
+                        'articles'
+                    ) }}"
+                    alt="{{ item.title }}"
+                >
+
+                {% endif %}
+
+
+                <div class="card-body">
+
+                    <span class="meta">
+                        Article
+                    </span>
+
+
+                    <h3>
+                        {{ item.title }}
+                    </h3>
+
+
+                    <p>
+                        {{ item.summary or
+                        'Read the complete article and explore more Islamic knowledge.' }}
+                    </p>
+
+
+                    <a
+                        class="text-link"
+                        href="{{ url_for(
+                            'public.article_detail',
+                            article_id=item.id
+                        ) }}"
+                    >
+
+                        Read Article
+
+                        <i
+                            class="fa-solid fa-arrow-right"
+                            aria-hidden="true"
+                        ></i>
+
+                    </a>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+<!-- =====================================================
+     BAYANS
+===================================================== -->
+
+<section
+    class="section"
+    id="bayan"
+>
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div>
+
+                <span class="eyebrow">
+                    LECTURES
+                </span>
+
+                <h2>
+                    Latest Bayans
+                </h2>
+
+            </div>
+
+
+            <a
+                class="text-link"
+                href="{{ url_for('public.bayans') }}"
+            >
+
+                View All
+
+                <i
+                    class="fa-solid fa-arrow-right"
+                    aria-hidden="true"
+                ></i>
+
+            </a>
+
+        </div>
+
+
+        {% if latest_bayans %}
+
+        <div class="card-grid home-latest-grid home-bayans-grid">
+
+            {% for item in latest_bayans %}
+
+            <article
+                class="content-card home-latest-card home-bayan-card"
+            >
+
+                {% if item.thumbnail %}
+
+                <img
+                    src="{{ media_url(
+                        item.thumbnail,
+                        'bayans'
+                    ) }}"
+                    alt="{{ item.title }}"
+                >
+
+                {% else %}
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/branding/bayan1.jpg'
+                    ) }}"
+                    alt="{{ item.title }}"
+                >
+
+                {% endif %}
+
+
+                <div class="card-body">
+
+                    <span class="meta">
+
+                        {% if item.upload_type == 'online' %}
+
+                            {{ item.platform or 'Online Bayan' }}
+
+                        {% elif item.upload_type == 'upload' %}
+
+                            Uploaded Video
+
+                        {% else %}
+
+                            Bayan
+
+                        {% endif %}
+
+                    </span>
+
+
+                    <h3>
+                        {{ item.title }}
+                    </h3>
+
+
+                    <p>
+                        {{ item.description or
+                        'Watch this Bayan and listen to the lecture.' }}
+                    </p>
+
+
+                    {% if
+                        (
+                            item.upload_type == 'online'
+                            and item.video_url
+                        )
+                        or
+                        (
+                            item.upload_type == 'upload'
+                            and item.video_file
+                        )
+                    %}
+
+                    <a
+                        class="text-link"
+                        href="{{ url_for(
+                            'public.bayan_watch',
+                            bayan_id=item.id
+                        ) }}"
+                    >
+
+                        Watch
+
+                        <i
+                            class="fa-solid fa-play"
+                            aria-hidden="true"
+                        ></i>
+
+                    </a>
+
+                    {% else %}
+
+                    <a
+                        class="text-link"
+                        href="{{ url_for(
+                            'public.bayan_detail',
+                            bayan_id=item.id
+                        ) }}"
+                    >
+
+                        View Details
+
+                        <i
+                            class="fa-solid fa-arrow-right"
+                            aria-hidden="true"
+                        ></i>
+
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+        <div class="empty-state">
+
+            <i class="fa-solid fa-microphone-lines"></i>
+
+            <h3>
+                Bayans will appear here
+            </h3>
+
+            <p>
+                No Bayan lectures are available at the moment.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     BOOKS
+===================================================== -->
+
+<section
+    class="section section-soft publications-section"
+    id="books"
+>
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div>
+
+                <span class="eyebrow">
+                    PUBLICATIONS
+                </span>
+
+
+                <h2>
+                    Books
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        {% if latest_online_book or latest_sell_book %}
+
+        <div
+            class="
+                publications-grid
+
+                {% if latest_online_book and latest_sell_book %}
+                    has-two
+                {% else %}
+                    has-one
+                {% endif %}
+            "
+        >
+
+            <!-- READ ONLINE -->
+
+            {% if latest_online_book %}
+
+            <article class="content-card publication-card">
+
+                {% if latest_online_book.image %}
+
+                <img
+                    src="{{ media_url(
+                        latest_online_book.image,
+                        'books'
+                    ) }}"
+                    alt="{{ latest_online_book.title }}"
+                >
+
+                {% else %}
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/branding/book.png'
+                    ) }}"
+                    alt="{{ latest_online_book.title }}"
+                >
+
+                {% endif %}
+
+
+                <div class="card-body">
+
+                    <span class="meta">
+                        Read Online
+                    </span>
+
+
+                    <h3>
+                        {{ latest_online_book.title }}
+                    </h3>
+
+
+                    <p>
+                        By {{ latest_online_book.author }}
+                    </p>
+
+
+                    <a
+                        class="btn btn-green"
+                        href="{{ url_for(
+                            'public.book_reader',
+                            book_id=latest_online_book.id
+                        ) }}"
+                    >
+
+                        Read Online
+
+                        <i
+                            class="fa-solid fa-book-open"
+                            aria-hidden="true"
+                        ></i>
+
+                    </a>
+
+                </div>
+
+
+                <div class="publication-footer">
+
+                    <a
+                        class="text-link"
+                        href="{{ url_for(
+                            'public.online_books'
+                        ) }}"
+                    >
+
+                        View All
+
+                        <i
+                            class="fa-solid fa-arrow-right"
+                            aria-hidden="true"
+                        ></i>
+
+                    </a>
+
+                </div>
+
+            </article>
+
+            {% endif %}
+
+
+            <!-- BUY BOOK -->
+
+            {% if latest_sell_book %}
+
+            <article class="content-card publication-card">
+
+                {% if latest_sell_book.image %}
+
+                <img
+                    src="{{ media_url(
+                        latest_sell_book.image,
+                        'books'
+                    ) }}"
+                    alt="{{ latest_sell_book.title }}"
+                >
+
+                {% else %}
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/branding/book.png'
+                    ) }}"
+                    alt="{{ latest_sell_book.title }}"
+                >
+
+                {% endif %}
+
+
+                <div class="card-body">
+
+                    <span class="meta">
+                        Buy Book
+                    </span>
+
+
+                    <h3>
+                        {{ latest_sell_book.title }}
+                    </h3>
+
+
+                    <p>
+                        By {{ latest_sell_book.author }}
+                    </p>
+
+
+                    <a
+                        class="btn btn-gold"
+                        href="{{ url_for(
+                            'public.book_detail',
+                            book_id=latest_sell_book.id
+                        ) }}"
+                    >
+
+                        Buy Book
+
+                        <i
+                            class="fa-solid fa-arrow-right"
+                            aria-hidden="true"
+                        ></i>
+
+                    </a>
+
+                </div>
+
+
+                <div class="publication-footer">
+
+                    <a
+                        class="text-link"
+                        href="{{ url_for(
+                            'public.books_buy'
+                        ) }}"
+                    >
+
+                        View All
+
+                        <i
+                            class="fa-solid fa-arrow-right"
+                            aria-hidden="true"
+                        ></i>
+
+                    </a>
+
+                </div>
+
+            </article>
+
+            {% endif %}
+
+        </div>
+
+
+        {% else %}
+
+        <div class="empty-state books-empty-state">
+
+            <i class="fa-solid fa-book"></i>
+
+            <h3>
+                Books not available
+            </h3>
+
+            <p>
+                Books will appear here when they are published.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     URDU ADAB
+===================================================== -->
+
+{% if latest_adab %}
+
+<section
+    class="section"
+    id="adab"
+>
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div>
+
+                <span class="eyebrow">
+                    URDU LITERATURE
+                </span>
+
+
+                <h2>
+                    Urdu Adab
+                </h2>
+
+            </div>
+
+
+            <a
+                class="text-link"
+                href="{{ url_for('public.adab') }}"
+            >
+
+                View All
+
+                <i
+                    class="fa-solid fa-arrow-right"
+                    aria-hidden="true"
+                ></i>
+
+            </a>
+
+        </div>
+
+
+        <div class="card-grid home-latest-grid home-adab-grid">
+
+            {% for item in latest_adab %}
+
+            <article
+                class="content-card home-latest-card home-adab-card"
+            >
+
+                <div class="card-body">
+
+                    <span class="meta">
+                        {{ item.category or 'Other' }}
+                    </span>
+
+
+                    <h3>
+                        {{ item.title }}
+                    </h3>
+
+
+                    <p>
+                        {{ item.summary or
+                        'Explore Urdu literature and poetry.' }}
+                    </p>
+
+
+                    <a
+                        class="text-link"
+                        href="{{ url_for(
+                            'public.adab_detail',
+                            item_id=item.id
+                        ) }}"
+                    >
+
+                        Read More
+
+                        <i
+                            class="fa-solid fa-arrow-right"
+                            aria-hidden="true"
+                        ></i>
+
+                    </a>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+<!-- =====================================================
+     GALLERY
+===================================================== -->
+
+<section
+    class="section section-soft"
+    id="gallery"
+>
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div>
+
+                <span class="eyebrow">
+                    MEMORIES
+                </span>
+
+
+                <h2>
+                    Gallery
+                </h2>
+
+            </div>
+
+
+            <a
+                class="text-link"
+                href="{{ url_for('public.gallery') }}"
+            >
+
+                View All
+
+                <i
+                    class="fa-solid fa-arrow-right"
+                    aria-hidden="true"
+                ></i>
+
+            </a>
+
+        </div>
+
+
+        <div class="gallery-grid home-gallery-grid">
+
+            {% for item in latest_gallery %}
+
+            <figure>
+
+                <img
+                    src="{{ media_url(
+                        item.image,
+                        'gallery'
+                    ) }}"
+                    alt="{{ item.caption or 'Gallery photo' }}"
+                >
+
+
+                {% if item.caption %}
+
+                <figcaption>
+                    {{ item.caption }}
+                </figcaption>
+
+                {% endif %}
+
+            </figure>
+
+            {% endfor %}
+
+
+            {% if not latest_gallery %}
+
+            <div class="empty-state">
+
+                <i class="fa-regular fa-image"></i>
+
+                <h3>
+                    Gallery will appear here
+                </h3>
+
+                <p>
+                    No gallery photos are available at the moment.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="cta-section">
+
+    <div class="container cta-box">
+
+        <div>
+
+            <span class="eyebrow">
+                GET IN TOUCH
+            </span>
+
+
+            <h2>
+                Have a question or message?
+            </h2>
+
+
+            <p>
+                Use the contact form to send a message to the website administration.
+            </p>
+
+        </div>
+
+
+        <a
+            class="btn btn-gold"
+            href="{{ url_for('public.contact') }}"
+        >
+
+            Contact Us
+
+        </a>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

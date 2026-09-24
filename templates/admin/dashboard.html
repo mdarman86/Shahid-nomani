@@ -1,0 +1,294 @@
+{% extends 'admin/base.html' %}
+
+
+{% block title %}
+Admin Dashboard | Shahid Nomani
+{% endblock %}
+
+
+{% block heading %}
+Dashboard
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="dashboard-hero">
+
+    <div class="dashboard-hero-content">
+
+        <span class="eyebrow">
+            CONTENT MANAGEMENT
+        </span>
+
+        <h2>
+            Website Overview
+        </h2>
+
+    </div>
+
+
+    <div class="dashboard-logo">
+
+        <img
+            src="{{ url_for('static', filename='images/branding/footer_logo.jpg') }}"
+            alt="Shahid Nomani"
+        >
+
+    </div>
+
+</section>
+
+
+<div class="stats-grid">
+
+
+    <a
+        class="stat-card"
+        href="{{ url_for('admin.articles') }}"
+    >
+
+        <div class="stat-icon">
+
+            <i class="fa-solid fa-newspaper"></i>
+
+        </div>
+
+        <strong>
+            {{ counts.articles }}
+        </strong>
+
+        <span>
+            Articles
+        </span>
+
+        <small>
+            Manage articles
+            <i class="fa-solid fa-arrow-right"></i>
+        </small>
+
+    </a>
+
+
+    <a
+        class="stat-card"
+        href="{{ url_for('admin.bayans') }}"
+    >
+
+        <div class="stat-icon">
+
+            <i class="fa-solid fa-microphone-lines"></i>
+
+        </div>
+
+        <strong>
+            {{ counts.bayans }}
+        </strong>
+
+        <span>
+            Bayans
+        </span>
+
+        <small>
+            Manage lectures
+            <i class="fa-solid fa-arrow-right"></i>
+        </small>
+
+    </a>
+
+
+    <a
+        class="stat-card"
+        href="{{ url_for('admin.books') }}"
+    >
+
+        <div class="stat-icon">
+
+            <i class="fa-solid fa-book"></i>
+
+        </div>
+
+        <strong>
+            {{ counts.books }}
+        </strong>
+
+        <span>
+            Books
+        </span>
+
+        <small>
+            Manage books
+            <i class="fa-solid fa-arrow-right"></i>
+        </small>
+
+    </a>
+
+
+    <a
+        class="stat-card"
+        href="{{ url_for('admin.adab') }}"
+    >
+
+        <div class="stat-icon">
+
+            <i class="fa-solid fa-feather"></i>
+
+        </div>
+
+        <strong>
+            {{ counts.adab }}
+        </strong>
+
+        <span>
+            Urdu Adab
+        </span>
+
+        <small>
+            Manage literature
+            <i class="fa-solid fa-arrow-right"></i>
+        </small>
+
+    </a>
+
+
+    <a
+        class="stat-card"
+        href="{{ url_for('admin.gallery') }}"
+    >
+
+        <div class="stat-icon">
+
+            <i class="fa-regular fa-image"></i>
+
+        </div>
+
+        <strong>
+            {{ counts.gallery }}
+        </strong>
+
+        <span>
+            Gallery
+        </span>
+
+        <small>
+            Manage photos
+            <i class="fa-solid fa-arrow-right"></i>
+        </small>
+
+    </a>
+
+
+    <a
+        class="stat-card"
+        href="{{ url_for('admin.messages') }}"
+    >
+
+        <div class="stat-icon">
+
+            <i class="fa-regular fa-envelope"></i>
+
+        </div>
+
+        <strong>
+            {{ counts.messages }}
+        </strong>
+
+        <span>
+            Messages
+        </span>
+
+        <small>
+            View messages
+            <i class="fa-solid fa-arrow-right"></i>
+        </small>
+
+    </a>
+
+
+</div>
+
+
+<section class="quick-panel">
+
+    <div class="quick-panel-head">
+
+        <div>
+
+            <span class="eyebrow">
+                QUICK ACTIONS
+            </span>
+
+            <h3>
+                Add New Content
+            </h3>
+
+        </div>
+
+    </div>
+
+
+    <div class="quick-links">
+
+
+        <a href="{{ url_for('admin.article_new') }}">
+
+            <i class="fa-regular fa-newspaper"></i>
+
+            <span>
+                Add Article
+            </span>
+
+        </a>
+
+
+        <a href="{{ url_for('admin.bayan_new') }}">
+
+            <i class="fa-solid fa-microphone-lines"></i>
+
+            <span>
+                Add Bayan
+            </span>
+
+        </a>
+
+
+        <a href="{{ url_for('admin.book_new') }}">
+
+            <i class="fa-solid fa-book"></i>
+
+            <span>
+                Add Book
+            </span>
+
+        </a>
+
+
+        <a href="{{ url_for('admin.adab_new') }}">
+
+            <i class="fa-solid fa-feather"></i>
+
+            <span>
+                Add Adab
+            </span>
+
+        </a>
+
+
+        <a href="{{ url_for('admin.gallery_new') }}">
+
+            <i class="fa-regular fa-image"></i>
+
+            <span>
+                Add Photo
+            </span>
+
+        </a>
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}
