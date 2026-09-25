@@ -8,7 +8,6 @@ Add Book
 
 {% block content %}
 
-
 <form
     class="admin-form book-form upload-form"
     method="post"
@@ -19,6 +18,10 @@ Add Book
 
     {% include "_csrf.html" %}
 
+
+    <!-- =========================================
+         BOOK TYPE
+    ========================================== -->
 
     <label>
 
@@ -43,6 +46,10 @@ Add Book
     </label>
 
 
+    <!-- =========================================
+         TITLE
+    ========================================== -->
+
     <label>
 
         Title
@@ -58,6 +65,10 @@ Add Book
     </label>
 
 
+    <!-- =========================================
+         AUTHOR
+    ========================================== -->
+
     <label>
 
         Author
@@ -66,7 +77,7 @@ Add Book
             type="text"
             name="author"
             value="Shahid Nomani"
-            maxlength="120"
+            maxlength="150"
             required
             placeholder="Author name"
         >
@@ -74,28 +85,9 @@ Add Book
     </label>
 
 
-    <div
-        class="book-field"
-        data-sell-field
-        hidden
-    >
-
-        <label>
-
-            Price (₹)
-
-            <input
-                type="number"
-                name="price"
-                min="0"
-                step="1"
-                placeholder="Enter price in INR"
-            >
-
-        </label>
-
-    </div>
-
+    <!-- =========================================
+         COVER IMAGE
+    ========================================== -->
 
     <label>
 
@@ -115,6 +107,10 @@ Add Book
 
     </label>
 
+
+    <!-- =========================================
+         READ ONLINE ONLY
+    ========================================== -->
 
     <div
         class="book-field"
@@ -140,6 +136,43 @@ Add Book
 
     </div>
 
+
+    <!-- =========================================
+         SELL / DELIVERY ONLY
+    ========================================== -->
+
+    <div
+        class="book-field"
+        data-sell-field
+        hidden
+    >
+
+        <label>
+
+            Price (₹)
+
+            <input
+                type="number"
+                name="price"
+                min="0"
+                max="10000000"
+                step="1"
+                placeholder="Enter price in INR"
+                data-price-input
+            >
+
+            <small class="field-help">
+                Enter the selling price in Indian Rupees.
+            </small>
+
+        </label>
+
+    </div>
+
+
+    <!-- =========================================
+         UPLOAD PROGRESS
+    ========================================== -->
 
     <div
         class="upload-progress"
@@ -177,6 +210,10 @@ Add Book
     </div>
 
 
+    <!-- =========================================
+         PUBLISH
+    ========================================== -->
+
     <label class="check">
 
         <input
@@ -190,11 +227,17 @@ Add Book
     </label>
 
 
+    <!-- =========================================
+         SUBMIT
+    ========================================== -->
+
     <button
         class="admin-btn"
         type="submit"
         data-submit-button
     >
+
+        <i class="fa-solid fa-cloud-arrow-up"></i>
 
         Save Book
 
@@ -202,6 +245,38 @@ Add Book
 
 
 </form>
+
+
+<!-- =========================================
+     SUCCESS POPUP
+========================================== -->
+
+<div
+    class="upload-success-popup"
+    data-upload-success-popup
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="uploadSuccessTitle"
+>
+
+    <div class="upload-success-card">
+
+        <div class="upload-success-icon">
+            <i class="fa-solid fa-check"></i>
+        </div>
+
+        <h3 id="uploadSuccessTitle">
+            Book uploaded successfully
+        </h3>
+
+        <p>
+            Your book has been saved successfully.
+        </p>
+
+    </div>
+
+</div>
 
 
 {% endblock %}

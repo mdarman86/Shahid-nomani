@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (input && input.value) {
                 return input.value;
             }
-
         }
 
         const meta =
@@ -43,9 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "X-CSRFToken",
                 token
             );
-
         }
-
     }
 
 
@@ -82,9 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
 
             return null;
-
         }
-
     }
 
 
@@ -111,9 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
 
             return false;
-
         }
-
     }
 
 
@@ -143,43 +136,29 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        adminSidebar.classList.add(
-            "open"
-        );
-
-        adminSidebar.classList.add(
-            "active"
-        );
+        adminSidebar.classList.add("open");
+        adminSidebar.classList.add("active");
 
         if (adminSidebarOverlay) {
 
-            adminSidebarOverlay.classList.add(
-                "show"
-            );
-
-            adminSidebarOverlay.classList.add(
-                "active"
-            );
+            adminSidebarOverlay.classList.add("show");
+            adminSidebarOverlay.classList.add("active");
 
         }
 
         if (adminSidebarToggle) {
 
-            adminSidebarToggle.classList.add(
-                "active"
-            );
+            adminSidebarToggle.classList.add("active");
 
             adminSidebarToggle.setAttribute(
                 "aria-expanded",
                 "true"
             );
-
         }
 
         document.body.classList.add(
             "sidebar-open"
         );
-
     }
 
 
@@ -189,43 +168,29 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        adminSidebar.classList.remove(
-            "open"
-        );
-
-        adminSidebar.classList.remove(
-            "active"
-        );
+        adminSidebar.classList.remove("open");
+        adminSidebar.classList.remove("active");
 
         if (adminSidebarOverlay) {
 
-            adminSidebarOverlay.classList.remove(
-                "show"
-            );
-
-            adminSidebarOverlay.classList.remove(
-                "active"
-            );
+            adminSidebarOverlay.classList.remove("show");
+            adminSidebarOverlay.classList.remove("active");
 
         }
 
         if (adminSidebarToggle) {
 
-            adminSidebarToggle.classList.remove(
-                "active"
-            );
+            adminSidebarToggle.classList.remove("active");
 
             adminSidebarToggle.setAttribute(
                 "aria-expanded",
                 "false"
             );
-
         }
 
         document.body.classList.remove(
             "sidebar-open"
         );
-
     }
 
 
@@ -239,9 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (
                     adminSidebar &&
-                    adminSidebar.classList.contains(
-                        "open"
-                    )
+                    adminSidebar.classList.contains("open")
                 ) {
 
                     closeSidebar();
@@ -251,10 +214,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     openSidebar();
 
                 }
-
             }
         );
-
     }
 
 
@@ -264,14 +225,11 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             closeSidebar
         );
-
     }
 
 
     document
-        .querySelectorAll(
-            ".admin-sidebar a"
-        )
+        .querySelectorAll(".admin-sidebar a")
         .forEach((link) => {
 
             link.addEventListener(
@@ -286,10 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "keydown",
         (event) => {
 
-            if (
-                event.key ===
-                "Escape"
-            ) {
+            if (event.key === "Escape") {
 
                 closeSidebar();
 
@@ -304,9 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ========================================= */
 
     document
-        .querySelectorAll(
-            "[data-flash-close]"
-        )
+        .querySelectorAll("[data-flash-close]")
         .forEach((button) => {
 
             button.addEventListener(
@@ -321,65 +274,522 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (flash) {
                         flash.remove();
                     }
-
                 }
             );
-
         });
 
 
     /* =========================================
-       BOOK TYPE / FORM UI
+       BOOK FORM
     ========================================= */
+
+    const bookForm =
+        document.querySelector(
+            "[data-book-form]"
+        );
 
     const bookType =
         document.getElementById(
             "bookType"
         );
 
-    const bookPdfFields =
-        document.querySelectorAll(
-            "[data-book-pdf]"
+
+    if (bookForm && bookType) {
+
+        initBookForm(
+            bookForm
         );
-
-
-    function updateBookType() {
-
-        if (!bookType) {
-            return;
-        }
-
-        const isPdf =
-            bookType.value === "pdf";
-
-        bookPdfFields.forEach(
-            (field) => {
-
-                field.classList.toggle(
-                    "hidden",
-                    !isPdf
-                );
-
-            }
-        );
-
     }
 
 
-    if (bookType) {
+    function initBookForm(form) {
+
+        const readField =
+            form.querySelector(
+                "[data-read-field]"
+            );
+
+        const sellField =
+            form.querySelector(
+                "[data-sell-field]"
+            );
+
+        const pdfInput =
+            form.querySelector(
+                "[data-pdf-input]"
+            );
+
+        const priceInput =
+            form.querySelector(
+                "[data-price-input]"
+            );
+
+        const uploadInput =
+            form.querySelector(
+                "[data-upload-input]"
+            );
+
+        const submitButton =
+            form.querySelector(
+                "[data-submit-button]"
+            );
+
+        const progress =
+            form.querySelector(
+                "[data-upload-progress]"
+            );
+
+        const progressBar =
+            form.querySelector(
+                "[data-upload-bar]"
+            );
+
+        const progressPercent =
+            form.querySelector(
+                "[data-upload-percent]"
+            );
+
+        const progressStatus =
+            form.querySelector(
+                "[data-upload-status]"
+            );
+
+        const successPopup =
+            document.querySelector(
+                "[data-upload-success-popup]"
+            );
+
+
+        /* -------------------------------------
+           BOOK TYPE SWITCH
+        ------------------------------------- */
+
+        function updateBookType() {
+
+            const selectedType =
+                bookType.value;
+
+
+            const isRead =
+                selectedType === "read";
+
+            const isOrder =
+                selectedType === "order";
+
+
+            /* Read Online */
+
+            if (readField) {
+
+                readField.hidden =
+                    !isRead;
+            }
+
+
+            if (pdfInput) {
+
+                pdfInput.disabled =
+                    !isRead;
+
+                pdfInput.required =
+                    isRead;
+
+            }
+
+
+            /* Sell / Delivery */
+
+            if (sellField) {
+
+                sellField.hidden =
+                    !isOrder;
+            }
+
+
+            if (priceInput) {
+
+                priceInput.disabled =
+                    !isOrder;
+
+                priceInput.required =
+                    isOrder;
+
+            }
+
+
+            /* Clear inactive field */
+
+            if (!isRead && pdfInput) {
+
+                pdfInput.value = "";
+
+            }
+
+
+            if (!isOrder && priceInput) {
+
+                priceInput.value = "";
+
+            }
+        }
+
 
         bookType.addEventListener(
             "change",
             updateBookType
         );
 
+
         updateBookType();
 
+
+        /* -------------------------------------
+           SUCCESS POPUP
+        ------------------------------------- */
+
+        function showSuccessPopup() {
+
+            if (!successPopup) {
+                return;
+            }
+
+            successPopup.hidden = false;
+
+            requestAnimationFrame(() => {
+
+                successPopup.classList.add(
+                    "show"
+                );
+
+            });
+        }
+
+
+        /* -------------------------------------
+           BOOK UPLOAD
+        ------------------------------------- */
+
+        form.addEventListener(
+            "submit",
+            (event) => {
+
+                event.preventDefault();
+
+
+                const selectedType =
+                    bookType.value;
+
+
+                if (
+                    selectedType === "read" &&
+                    (
+                        !pdfInput ||
+                        !pdfInput.files ||
+                        !pdfInput.files.length
+                    )
+                ) {
+
+                    alert(
+                        "Please select the book PDF."
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    selectedType === "order" &&
+                    (
+                        !priceInput ||
+                        !priceInput.value.trim()
+                    )
+                ) {
+
+                    alert(
+                        "Please enter the book price."
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    !uploadInput ||
+                    !uploadInput.files ||
+                    !uploadInput.files.length
+                ) {
+
+                    alert(
+                        "Please select the book cover image."
+                    );
+
+                    return;
+                }
+
+
+                if (progress) {
+
+                    progress.hidden = false;
+
+                }
+
+
+                if (submitButton) {
+
+                    submitButton.disabled = true;
+
+                }
+
+
+                if (progressStatus) {
+
+                    progressStatus.textContent =
+                        "Uploading book...";
+
+                }
+
+
+                const formData =
+                    new FormData(form);
+
+
+                const xhr =
+                    new XMLHttpRequest();
+
+
+                xhr.open(
+                    "POST",
+                    form.action ||
+                    window.location.href,
+                    true
+                );
+
+
+                xhr.setRequestHeader(
+                    "X-Requested-With",
+                    "XMLHttpRequest"
+                );
+
+
+                xhr.setRequestHeader(
+                    "Accept",
+                    "application/json"
+                );
+
+
+                setCsrfHeader(
+                    xhr,
+                    form
+                );
+
+
+                xhr.upload.onprogress =
+                    (event) => {
+
+                        if (
+                            !event.lengthComputable
+                        ) {
+                            return;
+                        }
+
+
+                        const percent =
+                            Math.round(
+                                (
+                                    event.loaded /
+                                    event.total
+                                ) *
+                                100
+                            );
+
+
+                        if (progressBar) {
+
+                            progressBar.style.width =
+                                `${percent}%`;
+
+                        }
+
+
+                        if (progressPercent) {
+
+                            progressPercent.textContent =
+                                `${percent}%`;
+
+                        }
+
+
+                        if (progressStatus) {
+
+                            progressStatus.textContent =
+                                percent >= 100
+                                    ? "Processing book..."
+                                    : "Uploading book...";
+
+                        }
+                    };
+
+
+                xhr.onload =
+                    () => {
+
+                        let data = null;
+
+
+                        try {
+
+                            data =
+                                JSON.parse(
+                                    xhr.responseText
+                                );
+
+                        } catch (error) {
+
+                            data = null;
+
+                        }
+
+
+                        /* ---------------------------------
+                           SUCCESS
+                        --------------------------------- */
+
+                        if (
+                            xhr.status >= 200 &&
+                            xhr.status < 300 &&
+                            data &&
+                            data.success
+                        ) {
+
+                            if (progressBar) {
+
+                                progressBar.style.width =
+                                    "100%";
+
+                            }
+
+
+                            if (progressPercent) {
+
+                                progressPercent.textContent =
+                                    "100%";
+
+                            }
+
+
+                            if (progressStatus) {
+
+                                progressStatus.textContent =
+                                    "Upload complete.";
+
+                            }
+
+
+                            showSuccessPopup();
+
+
+                            /*
+                             * Give the user enough time
+                             * to see the success popup.
+                             */
+
+                            setTimeout(
+                                () => {
+
+                                    const redirect =
+                                        getSafeRedirect(
+                                            data.redirect
+                                        );
+
+
+                                    if (redirect) {
+
+                                        window.location.href =
+                                            redirect;
+
+                                    } else {
+
+                                        window.location.reload();
+
+                                    }
+
+                                },
+                                1500
+                            );
+
+
+                            return;
+                        }
+
+
+                        /* ---------------------------------
+                           VALIDATION / SERVER ERROR
+                        --------------------------------- */
+
+                        if (submitButton) {
+
+                            submitButton.disabled =
+                                false;
+
+                        }
+
+
+                        if (progress) {
+
+                            progress.hidden =
+                                true;
+
+                        }
+
+
+                        const message =
+                            data &&
+                            data.message
+                                ? data.message
+                                : "Book could not be uploaded.";
+
+
+                        alert(message);
+
+                    };
+
+
+                xhr.onerror =
+                    () => {
+
+                        if (submitButton) {
+
+                            submitButton.disabled =
+                                false;
+
+                        }
+
+
+                        if (progress) {
+
+                            progress.hidden =
+                                true;
+
+                        }
+
+
+                        alert(
+                            "Upload failed. Please check your connection and try again."
+                        );
+                    };
+
+
+                xhr.send(
+                    formData
+                );
+            }
+        );
     }
 
 
     /* =========================================
        BAYAN FORM
+       Existing Bayan functionality preserved
     ========================================= */
 
     const bayanForm =
@@ -393,15 +803,10 @@ document.addEventListener("DOMContentLoaded", () => {
         initBayanForm(
             bayanForm
         );
-
     }
 
 
     function initBayanForm(form) {
-
-        /* -------------------------------------
-           ELEMENTS
-        ------------------------------------- */
 
         const radios =
             form.querySelectorAll(
@@ -413,7 +818,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 "[data-upload-type]"
             );
 
-
         const onlineMode =
             document.getElementById(
                 "onlineMode"
@@ -423,7 +827,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById(
                 "offlineMode"
             );
-
 
         const onlineTitle =
             document.getElementById(
@@ -435,7 +838,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 "onlineDescription"
             );
 
-
         const videoUrl =
             document.getElementById(
                 "videoUrl"
@@ -446,7 +848,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 "platform"
             );
 
-
         const offlineTitle =
             document.getElementById(
                 "offlineTitle"
@@ -456,7 +857,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById(
                 "offlineDescription"
             );
-
 
         const videoFile =
             document.getElementById(
@@ -469,91 +869,47 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
 
-        /* -------------------------------------
-           MODE FIELD CONTROL
-        ------------------------------------- */
-
         function setOnlineFields(enabled) {
 
             if (platform) {
-
-                platform.disabled =
-                    !enabled;
-
+                platform.disabled = !enabled;
             }
-
 
             if (videoUrl) {
-
-                videoUrl.disabled =
-                    !enabled;
-
+                videoUrl.disabled = !enabled;
             }
-
 
             if (onlineTitle) {
-
-                onlineTitle.disabled =
-                    !enabled;
-
-                onlineTitle.required =
-                    enabled;
-
+                onlineTitle.disabled = !enabled;
+                onlineTitle.required = enabled;
             }
-
 
             if (onlineDescription) {
-
-                onlineDescription.disabled =
-                    !enabled;
-
+                onlineDescription.disabled = !enabled;
             }
-
         }
 
 
         function setOfflineFields(enabled) {
 
             if (offlineTitle) {
-
-                offlineTitle.disabled =
-                    !enabled;
-
-                offlineTitle.required =
-                    enabled;
-
+                offlineTitle.disabled = !enabled;
+                offlineTitle.required = enabled;
             }
-
 
             if (offlineDescription) {
-
-                offlineDescription.disabled =
-                    !enabled;
-
-                offlineDescription.required =
-                    enabled;
-
+                offlineDescription.disabled = !enabled;
+                offlineDescription.required = enabled;
             }
-
 
             if (videoFile) {
-
-                videoFile.disabled =
-                    !enabled;
-
-                videoFile.required =
-                    enabled;
-
+                videoFile.disabled = !enabled;
+                videoFile.required = enabled;
             }
-
 
             if (thumbnailFile) {
-
-                thumbnailFile.disabled =
-                    !enabled;
-
+                thumbnailFile.disabled = !enabled;
             }
-
         }
 
 
@@ -583,11 +939,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 onlineMode.setAttribute(
                     "aria-hidden",
-                    isOnline
-                        ? "false"
-                        : "true"
+                    isOnline ? "false" : "true"
                 );
-
             }
 
 
@@ -600,11 +953,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 offlineMode.setAttribute(
                     "aria-hidden",
-                    isOnline
-                        ? "true"
-                        : "false"
+                    isOnline ? "true" : "false"
                 );
-
             }
 
 
@@ -623,7 +973,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             input.checked
                         )
                     );
-
                 }
             );
 
@@ -668,9 +1017,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (videoUrl) {
                     videoUrl.value = "";
                 }
-
             }
-
         }
 
 
@@ -690,7 +1037,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         /* -------------------------------------
-           VIDEO PREVIEW / METADATA
+           METADATA
         ------------------------------------- */
 
         const metadataLoader =
@@ -738,9 +1085,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let metadataController = null;
 
 
-        function setMetadataLoading(
-            loading
-        ) {
+        function setMetadataLoading(loading) {
 
             if (metadataLoader) {
 
@@ -748,9 +1093,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "show",
                     loading
                 );
-
             }
-
 
             if (videoUrl) {
 
@@ -758,9 +1101,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "loading",
                     loading
                 );
-
             }
-
         }
 
 
@@ -773,10 +1114,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-
             metadataStatus.textContent =
                 message;
-
 
             metadataStatus.className =
                 "metadata-status";
@@ -787,9 +1126,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 metadataStatus.classList.add(
                     type
                 );
-
             }
-
         }
 
 
@@ -810,7 +1147,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             : ""
                     ) ||
                     "Video";
-
             }
 
 
@@ -819,7 +1155,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 previewTitle.textContent =
                     data.title ||
                     "Video preview";
-
             }
 
 
@@ -828,7 +1163,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 previewDescription.textContent =
                     data.description ||
                     "Video title and description will appear here.";
-
             }
 
 
@@ -856,9 +1190,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     onlinePreview.classList.add(
                         "show"
                     );
-
                 }
-
             }
 
 
@@ -874,7 +1206,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         0,
                         35
                     );
-
             }
 
 
@@ -890,7 +1221,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         0,
                         500
                     );
-
             }
 
 
@@ -904,16 +1234,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 thumbnail.value =
                     data.thumbnail;
-
             }
-
         }
 
-
-        /* -------------------------------------
-           FETCH VIDEO METADATA
-           POST + JSON + CSRF
-        ------------------------------------- */
 
         async function fetchMetadata() {
 
@@ -921,26 +1244,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+
             const url =
                 videoUrl.value.trim();
 
 
             if (!url) {
 
-                setMetadataStatus(
-                    ""
-                );
+                setMetadataStatus("");
 
                 if (onlinePreview) {
 
                     onlinePreview.classList.remove(
                         "show"
                     );
-
                 }
 
                 return;
-
             }
 
 
@@ -952,14 +1272,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
                 return;
-
             }
 
 
             if (metadataController) {
 
                 metadataController.abort();
-
             }
 
 
@@ -967,10 +1285,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 new AbortController();
 
 
-            setMetadataLoading(
-                true
-            );
-
+            setMetadataLoading(true);
 
             setMetadataStatus(
                 "Loading video details..."
@@ -988,7 +1303,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     throw new Error(
                         "Security token is missing. Please refresh the page."
                     );
-
                 }
 
 
@@ -997,44 +1311,25 @@ document.addEventListener("DOMContentLoaded", () => {
                         "/admin/bayans/preview",
                         {
                             method: "POST",
-
-                            credentials:
-                                "same-origin",
-
-                            referrerPolicy:
-                                "no-referrer",
-
-                            signal:
-                                metadataController.signal,
+                            credentials: "same-origin",
+                            referrerPolicy: "no-referrer",
+                            signal: metadataController.signal,
 
                             headers: {
-
-                                "Content-Type":
-                                    "application/json",
-
-                                "Accept":
-                                    "application/json",
-
-                                "X-Requested-With":
-                                    "XMLHttpRequest",
-
-                                "X-CSRFToken":
-                                    csrfToken
-
+                                "Content-Type": "application/json",
+                                "Accept": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                "X-CSRFToken": csrfToken
                             },
 
                             body:
-                                JSON.stringify(
-                                    {
-                                        url:
-                                            url,
-
-                                        platform:
-                                            platform
-                                                ? platform.value
-                                                : "Other"
-                                    }
-                                )
+                                JSON.stringify({
+                                    url: url,
+                                    platform:
+                                        platform
+                                            ? platform.value
+                                            : "Other"
+                                })
                         }
                     );
 
@@ -1052,13 +1347,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         data.message ||
                         "Video details could not be loaded."
                     );
-
                 }
 
 
-                updatePreview(
-                    data
-                );
+                updatePreview(data);
 
 
                 setMetadataStatus(
@@ -1074,9 +1366,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     error.name ===
                     "AbortError"
                 ) {
-
                     return;
-
                 }
 
 
@@ -1086,15 +1376,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     "error"
                 );
 
-
             } finally {
 
-                setMetadataLoading(
-                    false
-                );
-
+                setMetadataLoading(false);
             }
-
         }
 
 
@@ -1104,13 +1389,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 metadataTimer
             );
 
-
             metadataTimer =
                 setTimeout(
                     fetchMetadata,
                     700
                 );
-
         }
 
 
@@ -1121,12 +1404,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 scheduleMetadataFetch
             );
 
-
             videoUrl.addEventListener(
                 "blur",
                 fetchMetadata
             );
-
         }
 
 
@@ -1142,17 +1423,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     ) {
 
                         fetchMetadata();
-
                     }
-
                 }
             );
-
         }
 
 
         /* -------------------------------------
-           BAYAN FORM SUBMIT
+           BAYAN SUBMIT
         ------------------------------------- */
 
         form.addEventListener(
@@ -1161,9 +1439,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        function handleBayanSubmit(
-            event
-        ) {
+        function handleBayanSubmit(event) {
 
             const selected =
                 form.querySelector(
@@ -1176,26 +1452,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
 
-            /*
-             * Online Bayan:
-             * allow normal form submission.
-             */
-
             if (
                 selected.value !==
                 "upload"
             ) {
-
                 return;
-
             }
 
-
-            /*
-             * Offline Bayan:
-             * use XMLHttpRequest so upload
-             * progress can be displayed.
-             */
 
             event.preventDefault();
 
@@ -1211,12 +1474,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
                 return;
-
             }
 
 
             uploadBayanForm();
-
         }
 
 
@@ -1249,25 +1510,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             if (progress) {
-
-                progress.hidden =
-                    false;
-
+                progress.hidden = false;
             }
 
-
             if (submitButton) {
-
-                submitButton.disabled =
-                    true;
-
+                submitButton.disabled = true;
             }
 
 
             const formData =
-                new FormData(
-                    form
-                );
+                new FormData(form);
 
 
             const xhr =
@@ -1297,12 +1549,8 @@ document.addEventListener("DOMContentLoaded", () => {
             xhr.upload.onprogress =
                 function (event) {
 
-                    if (
-                        !event.lengthComputable
-                    ) {
-
+                    if (!event.lengthComputable) {
                         return;
-
                     }
 
 
@@ -1320,7 +1568,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         progressBar.style.width =
                             `${percent}%`;
-
                     }
 
 
@@ -1328,7 +1575,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         progressPercent.textContent =
                             `${percent}%`;
-
                     }
 
 
@@ -1338,9 +1584,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             percent >= 100
                                 ? "Processing video..."
                                 : "Uploading video...";
-
                     }
-
                 };
 
 
@@ -1360,9 +1604,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 );
 
 
-                            if (
-                                data.redirect
-                            ) {
+                            if (data.redirect) {
 
                                 const redirect =
                                     getSafeRedirect(
@@ -1376,9 +1618,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                         redirect;
 
                                     return;
-
                                 }
-
                             }
 
 
@@ -1391,17 +1631,12 @@ document.addEventListener("DOMContentLoaded", () => {
                             window.location.reload();
 
                             return;
-
                         }
-
                     }
 
 
                     if (submitButton) {
-
-                        submitButton.disabled =
-                            false;
-
+                        submitButton.disabled = false;
                     }
 
 
@@ -1409,9 +1644,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         progressText.textContent =
                             "Upload failed. Please try again.";
-
                     }
-
                 };
 
 
@@ -1419,10 +1652,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 function () {
 
                     if (submitButton) {
-
-                        submitButton.disabled =
-                            false;
-
+                        submitButton.disabled = false;
                     }
 
 
@@ -1430,23 +1660,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         progressText.textContent =
                             "Upload failed. Please check your connection.";
-
                     }
-
                 };
 
 
             xhr.send(
                 formData
             );
-
         }
-
     }
 
 
     /* =========================================
        NORMAL FILE UPLOAD PROGRESS
+       Gallery etc.
     ========================================= */
 
     document
@@ -1455,14 +1682,20 @@ document.addEventListener("DOMContentLoaded", () => {
         )
         .forEach((form) => {
 
+            /*
+             * Book and Bayan already have
+             * their own upload handlers.
+             */
+
             if (
+                form.hasAttribute(
+                    "data-book-form"
+                ) ||
                 form.hasAttribute(
                     "data-bayan-form"
                 )
             ) {
-
                 return;
-
             }
 
 
@@ -1481,9 +1714,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         !input.files ||
                         !input.files.length
                     ) {
-
                         return;
-
                     }
 
 
@@ -1517,18 +1748,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                     if (progress) {
-
-                        progress.hidden =
-                            false;
-
+                        progress.hidden = false;
                     }
 
-
                     if (submit) {
-
-                        submit.disabled =
-                            true;
-
+                        submit.disabled = true;
                     }
 
 
@@ -1550,6 +1774,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
 
+                    xhr.setRequestHeader(
+                        "Accept",
+                        "application/json"
+                    );
+
+
                     setCsrfHeader(
                         xhr,
                         form
@@ -1557,9 +1787,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                     const formData =
-                        new FormData(
-                            form
-                        );
+                        new FormData(form);
 
 
                     xhr.upload.onprogress =
@@ -1568,9 +1796,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             if (
                                 !event.lengthComputable
                             ) {
-
                                 return;
-
                             }
 
 
@@ -1585,18 +1811,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                             if (bar) {
-
                                 bar.style.width =
                                     `${value}%`;
-
                             }
 
 
                             if (percent) {
-
                                 percent.textContent =
                                     `${value}%`;
-
                             }
 
 
@@ -1606,80 +1828,70 @@ document.addEventListener("DOMContentLoaded", () => {
                                     value >= 100
                                         ? "Processing..."
                                         : "Uploading...";
-
                             }
-
                         };
 
 
                     xhr.onload =
                         () => {
 
+                            let data = null;
+
+
+                            try {
+
+                                data =
+                                    JSON.parse(
+                                        xhr.responseText
+                                    );
+
+                            } catch (error) {
+
+                                data = null;
+                            }
+
+
                             if (
                                 xhr.status >= 200 &&
-                                xhr.status < 400
+                                xhr.status < 300 &&
+                                data &&
+                                data.success
                             ) {
 
-                                try {
-
-                                    const data =
-                                        JSON.parse(
-                                            xhr.responseText
-                                        );
-
-
-                                    if (
+                                const redirect =
+                                    getSafeRedirect(
                                         data.redirect
-                                    ) {
-
-                                        const redirect =
-                                            getSafeRedirect(
-                                                data.redirect
-                                            );
+                                    );
 
 
-                                        if (redirect) {
+                                if (redirect) {
 
-                                            window.location.href =
-                                                redirect;
-
-                                            return;
-
-                                        }
-
-                                    }
-
-
-                                    window.location.reload();
+                                    window.location.href =
+                                        redirect;
 
                                     return;
-
-                                } catch (error) {
-
-                                    window.location.reload();
-
-                                    return;
-
                                 }
 
+
+                                window.location.reload();
+
+                                return;
                             }
 
 
                             if (submit) {
-
-                                submit.disabled =
-                                    false;
-
+                                submit.disabled = false;
                             }
 
 
-                            if (status) {
+                            const message =
+                                data &&
+                                data.message
+                                    ? data.message
+                                    : "Upload failed.";
 
-                                status.textContent =
-                                    "Upload failed.";
 
-                            }
-
+                            alert(message);
                         };
 
 
@@ -1687,10 +1899,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         () => {
 
                             if (submit) {
-
-                                submit.disabled =
-                                    false;
-
+                                submit.disabled = false;
                             }
 
 
@@ -1698,19 +1907,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
                                 status.textContent =
                                     "Upload failed. Please check your connection.";
-
                             }
-
                         };
 
 
                     xhr.send(
                         formData
                     );
-
                 }
             );
-
         });
 
 });

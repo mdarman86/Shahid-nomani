@@ -1449,9 +1449,11 @@ def article_delete(
 # BOOKS
 # =========================================================
 
-@admin_bp.route(
-    "/books"
-)
+# =========================================================
+# BOOKS
+# =========================================================
+
+@admin_bp.route("/books")
 @login_required
 def books():
 
@@ -1498,28 +1500,24 @@ def book_new():
         ).strip()
 
         if not title:
-
             return _render_or_json_error(
                 "admin/book_form.html",
                 "Title is required.",
             )
 
         if len(title) > 150:
-
             return _render_or_json_error(
                 "admin/book_form.html",
                 "Title must be 150 characters or less.",
             )
 
         if not author:
-
             return _render_or_json_error(
                 "admin/book_form.html",
                 "Author is required.",
             )
 
         if len(author) > 150:
-
             return _render_or_json_error(
                 "admin/book_form.html",
                 "Author must be 150 characters or less.",
@@ -1533,7 +1531,6 @@ def book_new():
             not image
             or not image.filename
         ):
-
             return _render_or_json_error(
                 "admin/book_form.html",
                 "Cover image is required.",
@@ -1553,7 +1550,6 @@ def book_new():
                 not pdf
                 or not pdf.filename
             ):
-
                 return _render_or_json_error(
                     "admin/book_form.html",
                     "PDF is required for Read Online books.",
@@ -1584,11 +1580,10 @@ def book_new():
                 item.pdf = _save(
                     pdf,
                     "books",
-                    DOCUMENT_EXTENSIONS,
+                    {"pdf"},
                 )
 
                 if not item.pdf:
-
                     raise ValueError(
                         "PDF upload returned an empty path."
                     )
@@ -1615,7 +1610,6 @@ def book_new():
             ).strip()
 
             if not price_text:
-
                 return _render_or_json_error(
                     "admin/book_form.html",
                     "Price is required for Sell / Delivery books.",
@@ -1635,17 +1629,9 @@ def book_new():
                 )
 
             if price < 0:
-
                 return _render_or_json_error(
                     "admin/book_form.html",
                     "Price cannot be negative.",
-                )
-
-            if price > 10000000:
-
-                return _render_or_json_error(
-                    "admin/book_form.html",
-                    "Price is too large.",
                 )
 
             try:
@@ -1681,11 +1667,15 @@ def book_new():
                     500,
                 )
 
-        try:
+        # =================================================
+        # SAVE BOOK
+        # =================================================
 
-            db.session.add(
-                item
-            )
+        db.session.add(
+            item
+        )
+
+        try:
 
             db.session.commit()
 
@@ -1702,12 +1692,12 @@ def book_new():
         if _is_ajax():
 
             return _ajax_success(
-                "Book created successfully.",
+                "Book uploaded successfully!",
                 "admin.books",
             )
 
         flash(
-            "Book created successfully.",
+            "Book uploaded successfully!",
             "success",
         )
 
@@ -1756,7 +1746,6 @@ def book_delete(
             "admin.books"
         )
     )
-
 
 # =========================================================
 # BAYANS

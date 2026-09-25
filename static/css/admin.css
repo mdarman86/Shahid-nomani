@@ -2400,3 +2400,121 @@ select {
     }
 
 }
+
+/* =========================================
+   UPLOAD SUCCESS POPUP
+========================================= */
+
+.upload-success-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+}
+
+
+.upload-success-popup.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.upload-success-card {
+    width: min(420px, 100%);
+
+    padding: 34px 28px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.20);
+
+    transform: translateY(15px) scale(0.96);
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.upload-success-popup.show
+.upload-success-card {
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+.upload-success-icon {
+    width: 64px;
+    height: 64px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #0f6b4d;
+    color: #ffffff;
+
+    font-size: 28px;
+}
+
+
+.upload-success-card h3 {
+    margin: 0 0 8px;
+
+    font-size: 21px;
+
+    color: #17352b;
+}
+
+
+.upload-success-card p {
+    margin: 0;
+
+    color: #66756f;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+@media (max-width: 520px) {
+
+    .upload-success-card {
+        padding: 30px 22px;
+        border-radius: 18px;
+    }
+
+    .upload-success-icon {
+        width: 58px;
+        height: 58px;
+        font-size: 24px;
+    }
+
+    .upload-success-card h3 {
+        font-size: 19px;
+    }
+}
