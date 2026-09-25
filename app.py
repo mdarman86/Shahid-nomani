@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory, Response, url_for
 from dotenv import load_dotenv
 
 from config import Config
@@ -96,6 +96,106 @@ def create_app():
         ):
 
             return None
+
+
+    # =====================================================
+    # ROBOTS.TXT
+    # =====================================================
+
+    @app.route("/robots.txt")
+    def robots_txt():
+
+        return send_from_directory(
+            app.static_folder,
+            "robots.txt",
+            mimetype="text/plain",
+        )
+
+
+    # =====================================================
+    # FAVICON
+    # =====================================================
+
+    @app.route("/favicon.ico")
+    def favicon():
+
+        return send_from_directory(
+            app.static_folder,
+            "images/branding/favicon.png",
+            mimetype="image/png",
+        )
+
+
+    # =====================================================
+    # SITEMAP.XML
+    # =====================================================
+
+    @app.route("/sitemap.xml")
+    def sitemap():
+
+        pages = [
+            url_for(
+                "public.home",
+                _external=True,
+            ),
+
+            url_for(
+                "public.about",
+                _external=True,
+            ),
+
+            url_for(
+                "public.articles",
+                _external=True,
+            ),
+
+            url_for(
+                "public.bayans",
+                _external=True,
+            ),
+
+            url_for(
+                "public.books",
+                _external=True,
+            ),
+
+            url_for(
+                "public.adab",
+                _external=True,
+            ),
+
+            url_for(
+                "public.gallery",
+                _external=True,
+            ),
+
+            url_for(
+                "public.contact",
+                _external=True,
+            ),
+        ]
+
+        urls = []
+
+        for page in pages:
+
+            urls.append(
+                f"""
+    <url>
+        <loc>{page}</loc>
+    </url>"""
+            )
+
+        sitemap_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{"".join(urls)}
+</urlset>
+"""
+
+        return Response(
+            sitemap_xml,
+            mimetype="application/xml",
+        )
 
 
     # =====================================================
