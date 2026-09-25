@@ -12,11 +12,13 @@ document.addEventListener(
                 "[data-article-toggle], [data-adab-toggle]"
             );
 
+
         function setExpandableHeight(content, open) {
 
             if (!content) {
                 return;
             }
+
 
             if (open) {
 
@@ -35,8 +37,11 @@ document.addEventListener(
                 requestAnimationFrame(() => {
                     content.style.maxHeight = "0px";
                 });
+
             }
+
         }
+
 
         expandableToggles.forEach((button) => {
 
@@ -47,34 +52,41 @@ document.addEventListener(
                         "[data-article-card], [data-adab-card]"
                     );
 
+
                 if (!card) {
                     return;
                 }
+
 
                 const content =
                     card.querySelector(
                         "[data-article-content], [data-adab-content]"
                     );
 
+
                 const text =
                     button.querySelector(
                         ".read-more-text"
                     );
+
 
                 const expanded =
                     !card.classList.contains(
                         "is-expanded"
                     );
 
+
                 card.classList.toggle(
                     "is-expanded",
                     expanded
                 );
 
+
                 button.setAttribute(
                     "aria-expanded",
                     expanded ? "true" : "false"
                 );
+
 
                 if (content) {
 
@@ -83,22 +95,31 @@ document.addEventListener(
                         expanded ? "false" : "true"
                     );
 
+
                     setExpandableHeight(
                         content,
                         expanded
                     );
+
                 }
 
+
                 if (text) {
+
                     text.textContent =
                         expanded
                             ? "Read Less"
                             : "Read More";
+
                 }
+
             });
+
         });
 
+
         /* Keep an already-open article/adab item correct if the viewport changes. */
+
         window.addEventListener("resize", () => {
 
             document
@@ -107,19 +128,24 @@ document.addEventListener(
                     "[data-adab-card].is-expanded [data-adab-content]"
                 )
                 .forEach((content) => {
+
                     content.style.maxHeight =
                         content.scrollHeight + "px";
+
                 });
+
         });
+
 
         /* =====================================================
            PUBLIC MOBILE MENU
-        ===================================================== */
+           ===================================================== */
 
         const publicToggle =
             document.getElementById(
                 "menuBtn"
             );
+
 
         const publicNav =
             document.getElementById(
@@ -133,21 +159,32 @@ document.addEventListener(
                 return;
             }
 
+
             publicNav.classList.remove(
                 "show"
             );
+
+            document.body.classList.remove(
+                "public-menu-open"
+            );
+
 
             if (publicToggle) {
 
                 publicToggle.innerHTML =
                     '<i class="fa-solid fa-bars"></i>';
 
-                publicToggle.classList.remove("active");
+
+                publicToggle.classList.remove(
+                    "active"
+                );
+
 
                 publicToggle.setAttribute(
                     "aria-label",
                     "Open navigation menu"
                 );
+
 
                 publicToggle.setAttribute(
                     "aria-expanded",
@@ -165,21 +202,32 @@ document.addEventListener(
                 return;
             }
 
+
             publicNav.classList.add(
                 "show"
             );
+
+            document.body.classList.add(
+                "public-menu-open"
+            );
+
 
             if (publicToggle) {
 
                 publicToggle.innerHTML =
                     '<i class="fa-solid fa-xmark"></i>';
 
-                publicToggle.classList.add("active");
+
+                publicToggle.classList.add(
+                    "active"
+                );
+
 
                 publicToggle.setAttribute(
                     "aria-label",
                     "Close navigation menu"
                 );
+
 
                 publicToggle.setAttribute(
                     "aria-expanded",
@@ -214,7 +262,7 @@ document.addEventListener(
 
                     const isOpen =
                         publicNav.classList.contains(
-                            "open"
+                            "show"
                         );
 
 
@@ -266,22 +314,25 @@ document.addEventListener(
 
         /* =====================================================
            ADMIN MOBILE SIDEBAR
-        ===================================================== */
+           ===================================================== */
 
         const sidebarToggle =
             document.getElementById(
                 "sidebarToggle"
             );
 
+
         const sidebar =
             document.getElementById(
                 "adminSidebar"
             );
 
+
         const sidebarClose =
             document.getElementById(
                 "sidebarClose"
             );
+
 
         const adminOverlay =
             document.getElementById(
@@ -294,6 +345,7 @@ document.addEventListener(
             if (!sidebar) {
                 return;
             }
+
 
             sidebar.classList.add(
                 "open"
@@ -321,6 +373,7 @@ document.addEventListener(
             if (!sidebar) {
                 return;
             }
+
 
             sidebar.classList.remove(
                 "open"
@@ -418,8 +471,42 @@ document.addEventListener(
 
 
         /* =====================================================
+           PUBLIC HEADER — SCROLL STATE
+           ===================================================== */
+
+        const publicHeader =
+            document.querySelector(".header");
+
+
+        if (publicHeader) {
+
+            const updateHeaderState = () => {
+
+                publicHeader.classList.toggle(
+                    "is-scrolled",
+                    window.scrollY > 12
+                );
+
+            };
+
+
+            window.addEventListener(
+                "scroll",
+                updateHeaderState,
+                {
+                    passive: true
+                }
+            );
+
+
+            updateHeaderState();
+
+        }
+
+
+        /* =====================================================
            BACK TO TOP
-        ===================================================== */
+           ===================================================== */
 
         const backTop =
             document.getElementById(
@@ -469,7 +556,7 @@ document.addEventListener(
 
         /* =====================================================
            BAYAN FORM
-        ===================================================== */
+           ===================================================== */
 
         const bayanForm =
             document.getElementById(
@@ -488,7 +575,7 @@ document.addEventListener(
 
         /* =====================================================
            BOOK ORDER FORM
-        ===================================================== */
+           ===================================================== */
 
         const bookOrderForm =
             document.getElementById(
@@ -510,7 +597,7 @@ document.addEventListener(
 
 /* =========================================================
    BAYAN FORM INITIALIZER
-========================================================= */
+   ========================================================= */
 
 function initBayanForm(
     bayanForm
@@ -527,6 +614,7 @@ function initBayanForm(
             "onlineMode"
         );
 
+
     const offlineMode =
         document.getElementById(
             "offlineMode"
@@ -537,6 +625,7 @@ function initBayanForm(
         document.getElementById(
             "onlineTitle"
         );
+
 
     const onlineDescription =
         document.getElementById(
@@ -549,10 +638,12 @@ function initBayanForm(
             "videoUrl"
         );
 
+
     const platform =
         document.getElementById(
             "platform"
         );
+
 
     const thumbnail =
         document.getElementById(
@@ -565,6 +656,7 @@ function initBayanForm(
             "offlineTitle"
         );
 
+
     const offlineDescription =
         document.getElementById(
             "offlineDescription"
@@ -575,6 +667,7 @@ function initBayanForm(
         document.getElementById(
             "videoFile"
         );
+
 
     const thumbnailFile =
         document.getElementById(
@@ -587,6 +680,7 @@ function initBayanForm(
             "metadataLoader"
         );
 
+
     const metadataStatus =
         document.getElementById(
             "metadataStatus"
@@ -598,20 +692,24 @@ function initBayanForm(
             "onlinePreview"
         );
 
+
     const previewThumbnail =
         document.getElementById(
             "previewThumbnail"
         );
+
 
     const previewTitle =
         document.getElementById(
             "previewTitle"
         );
 
+
     const previewDescription =
         document.getElementById(
             "previewDescription"
         );
+
 
     const previewPlatform =
         document.getElementById(
@@ -624,15 +722,18 @@ function initBayanForm(
             "uploadProgress"
         );
 
+
     const progressBar =
         document.getElementById(
             "progressBar"
         );
 
+
     const progressPercent =
         document.getElementById(
             "progressPercent"
         );
+
 
     const progressText =
         document.getElementById(
@@ -647,7 +748,7 @@ function initBayanForm(
 
     /* =====================================================
        FORM MODE
-    ===================================================== */
+       ===================================================== */
 
     function setMode(mode) {
 
@@ -678,7 +779,7 @@ function initBayanForm(
 
         /* -------------------------------------------------
            ONLINE SECTION
-        ------------------------------------------------- */
+           ------------------------------------------------- */
 
         if (onlineMode) {
 
@@ -686,6 +787,7 @@ function initBayanForm(
                 "hidden",
                 !online
             );
+
 
             onlineMode.setAttribute(
                 "aria-hidden",
@@ -699,7 +801,7 @@ function initBayanForm(
 
         /* -------------------------------------------------
            OFFLINE SECTION
-        ------------------------------------------------- */
+           ------------------------------------------------- */
 
         if (offlineMode) {
 
@@ -707,6 +809,7 @@ function initBayanForm(
                 "hidden",
                 online
             );
+
 
             offlineMode.setAttribute(
                 "aria-hidden",
@@ -720,12 +823,13 @@ function initBayanForm(
 
         /* -------------------------------------------------
            ONLINE FIELDS
-        ------------------------------------------------- */
+           ------------------------------------------------- */
 
         if (videoUrl) {
 
             videoUrl.disabled =
                 !online;
+
 
             videoUrl.required =
                 online;
@@ -746,6 +850,7 @@ function initBayanForm(
             onlineTitle.disabled =
                 !online;
 
+
             onlineTitle.required =
                 online;
 
@@ -757,6 +862,7 @@ function initBayanForm(
             onlineDescription.disabled =
                 !online;
 
+
             onlineDescription.required =
                 online;
 
@@ -765,12 +871,13 @@ function initBayanForm(
 
         /* -------------------------------------------------
            OFFLINE FIELDS
-        ------------------------------------------------- */
+           ------------------------------------------------- */
 
         if (offlineTitle) {
 
             offlineTitle.disabled =
                 online;
+
 
             offlineTitle.required =
                 !online;
@@ -783,6 +890,7 @@ function initBayanForm(
             offlineDescription.disabled =
                 online;
 
+
             offlineDescription.required =
                 !online;
 
@@ -793,6 +901,7 @@ function initBayanForm(
 
             videoFile.disabled =
                 online;
+
 
             videoFile.required =
                 !online;
@@ -810,7 +919,7 @@ function initBayanForm(
 
         /* -------------------------------------------------
            CLEAR INACTIVE MODE DATA
-        ------------------------------------------------- */
+           ------------------------------------------------- */
 
         if (online) {
 
@@ -902,6 +1011,7 @@ function initBayanForm(
                 metadataStatus.textContent =
                     "";
 
+
                 metadataStatus.classList.remove(
                     "error"
                 );
@@ -918,7 +1028,7 @@ function initBayanForm(
 
     /* =====================================================
        CANCEL PREVIOUS METADATA REQUEST
-    ===================================================== */
+       ===================================================== */
 
     function cancelMetadataRequest() {
 
@@ -932,10 +1042,13 @@ function initBayanForm(
                 metadataRequest.abort();
 
             } catch (error) {
+
                 /* Ignore abort errors */
+
             }
 
         }
+
 
         metadataRequest = null;
 
@@ -944,7 +1057,7 @@ function initBayanForm(
 
     /* =====================================================
        TYPE CHANGE
-    ===================================================== */
+       ===================================================== */
 
     typeOptions.forEach(
         (option) => {
@@ -977,7 +1090,7 @@ function initBayanForm(
 
     /* =====================================================
        INITIAL MODE
-    ===================================================== */
+       ===================================================== */
 
     const checkedType =
         bayanForm.querySelector(
@@ -994,7 +1107,7 @@ function initBayanForm(
 
     /* =====================================================
        LOAD VIDEO METADATA
-    ===================================================== */
+       ===================================================== */
 
     async function loadMetadata() {
 
@@ -1031,11 +1144,13 @@ function initBayanForm(
                 metadataStatus.textContent =
                     "";
 
+
                 metadataStatus.classList.remove(
                     "error"
                 );
 
             }
+
 
             return;
 
@@ -1058,6 +1173,7 @@ function initBayanForm(
             metadataStatus.classList.remove(
                 "error"
             );
+
 
             metadataStatus.textContent =
                 "Loading video information...";
@@ -1133,7 +1249,7 @@ function initBayanForm(
 
             /* -------------------------------------------------
                ONLY UPDATE IF URL IS STILL THE SAME
-            ------------------------------------------------- */
+               ------------------------------------------------- */
 
             if (
                 videoUrl.value.trim() !== url
@@ -1247,6 +1363,7 @@ function initBayanForm(
                 metadataStatus.textContent =
                     "Video information loaded.";
 
+
                 metadataStatus.classList.remove(
                     "error"
                 );
@@ -1275,6 +1392,7 @@ function initBayanForm(
                 metadataStatus.classList.add(
                     "error"
                 );
+
 
                 metadataStatus.textContent =
                     error.message ||
@@ -1318,7 +1436,7 @@ function initBayanForm(
 
     /* =====================================================
        VIDEO URL INPUT
-    ===================================================== */
+       ===================================================== */
 
     if (videoUrl) {
 
@@ -1354,7 +1472,7 @@ function initBayanForm(
 
     /* =====================================================
        PLATFORM CHANGE
-    ===================================================== */
+       ===================================================== */
 
     if (platform) {
 
@@ -1388,7 +1506,7 @@ function initBayanForm(
 
     /* =====================================================
        VIDEO UPLOAD PROGRESS
-    ===================================================== */
+       ===================================================== */
 
     bayanForm.addEventListener(
         "submit",
@@ -1447,7 +1565,7 @@ function initBayanForm(
 
             /* -------------------------------------------------
                RESET PROGRESS UI
-            ------------------------------------------------- */
+               ------------------------------------------------- */
 
             if (uploadProgress) {
 
@@ -1484,7 +1602,7 @@ function initBayanForm(
 
             /* -------------------------------------------------
                XHR
-            ------------------------------------------------- */
+               ------------------------------------------------- */
 
             const xhr =
                 new XMLHttpRequest();
@@ -1505,7 +1623,7 @@ function initBayanForm(
 
             /* -------------------------------------------------
                UPLOAD PROGRESS
-            ------------------------------------------------- */
+               ------------------------------------------------- */
 
             xhr.upload.addEventListener(
                 "progress",
@@ -1560,7 +1678,7 @@ function initBayanForm(
 
             /* -------------------------------------------------
                SUCCESS / SERVER RESPONSE
-            ------------------------------------------------- */
+               ------------------------------------------------- */
 
             xhr.addEventListener(
                 "load",
@@ -1645,6 +1763,7 @@ function initBayanForm(
                             450
                         );
 
+
                     } else {
 
                         if (uploadProgress) {
@@ -1671,7 +1790,7 @@ function initBayanForm(
 
             /* -------------------------------------------------
                NETWORK ERROR
-            ------------------------------------------------- */
+               ------------------------------------------------- */
 
             xhr.addEventListener(
                 "error",
@@ -1690,7 +1809,7 @@ function initBayanForm(
 
             /* -------------------------------------------------
                UPLOAD ABORTED
-            ------------------------------------------------- */
+               ------------------------------------------------- */
 
             xhr.addEventListener(
                 "abort",
@@ -1709,7 +1828,7 @@ function initBayanForm(
 
             /* -------------------------------------------------
                SEND FORM
-            ------------------------------------------------- */
+               ------------------------------------------------- */
 
             const formData =
                 new FormData(
@@ -1729,7 +1848,7 @@ function initBayanForm(
 
 /* =========================================================
    BOOK ORDER FORM
-========================================================= */
+   ========================================================= */
 
 function initBookOrderForm(
     form
@@ -1740,45 +1859,54 @@ function initBookOrderForm(
             "fullName"
         );
 
+
     const mobileNumber =
         document.getElementById(
             "mobileNumber"
         );
+
 
     const alternateNumber =
         document.getElementById(
             "alternateNumber"
         );
 
+
     const address =
         document.getElementById(
             "address"
         );
+
 
     const district =
         document.getElementById(
             "district"
         );
 
+
     const state =
         document.getElementById(
             "state"
         );
+
 
     const pinCode =
         document.getElementById(
             "pinCode"
         );
 
+
     const countryCode =
         document.getElementById(
             "countryCode"
         );
 
+
     const alternateCountryCode =
         document.getElementById(
             "alternateCountryCode"
         );
+
 
     const whatsappError =
         document.getElementById(
@@ -1788,19 +1916,22 @@ function initBookOrderForm(
 
     /* =====================================================
        SERVER-SIDE BOOK DATA
-    ===================================================== */
+       ===================================================== */
 
     const whatsappNumber =
         form.dataset.whatsappNumber ||
         "";
 
+
     const bookTitle =
         form.dataset.bookTitle ||
         "";
 
+
     const bookAuthor =
         form.dataset.bookAuthor ||
         "";
+
 
     const bookPrice =
         form.dataset.bookPrice ||
@@ -1809,7 +1940,7 @@ function initBookOrderForm(
 
     /* =====================================================
        ERROR HELPERS
-    ===================================================== */
+       ===================================================== */
 
     function getErrorElement(
         element
@@ -1860,6 +1991,7 @@ function initBookOrderForm(
             "input-error"
         );
 
+
         element.setAttribute(
             "aria-invalid",
             "true"
@@ -1895,6 +2027,7 @@ function initBookOrderForm(
             "input-error"
         );
 
+
         element.removeAttribute(
             "aria-invalid"
         );
@@ -1904,7 +2037,7 @@ function initBookOrderForm(
 
     /* =====================================================
        PHONE VALIDATION
-    ===================================================== */
+       ===================================================== */
 
     function isValidPhone(
         value
@@ -1929,7 +2062,7 @@ function initBookOrderForm(
 
     /* =====================================================
        VALIDATION
-    ===================================================== */
+       ===================================================== */
 
     function validate() {
 
@@ -1951,7 +2084,7 @@ function initBookOrderForm(
 
         /* -------------------------------------------------
            FULL NAME
-        ------------------------------------------------- */
+           ------------------------------------------------- */
 
         if (
             !fullName ||
@@ -1970,7 +2103,7 @@ function initBookOrderForm(
 
         /* -------------------------------------------------
            MOBILE
-        ------------------------------------------------- */
+           ------------------------------------------------- */
 
         if (
             !mobileNumber ||
@@ -1991,7 +2124,7 @@ function initBookOrderForm(
 
         /* -------------------------------------------------
            ALTERNATE MOBILE
-        ------------------------------------------------- */
+           ------------------------------------------------- */
 
         if (
             alternateNumber &&
@@ -2013,7 +2146,7 @@ function initBookOrderForm(
 
         /* -------------------------------------------------
            ADDRESS
-        ------------------------------------------------- */
+           ------------------------------------------------- */
 
         if (
             !address ||
@@ -2032,7 +2165,7 @@ function initBookOrderForm(
 
         /* -------------------------------------------------
            DISTRICT
-        ------------------------------------------------- */
+           ------------------------------------------------- */
 
         if (
             !district ||
@@ -2051,7 +2184,7 @@ function initBookOrderForm(
 
         /* -------------------------------------------------
            STATE
-        ------------------------------------------------- */
+           ------------------------------------------------- */
 
         if (
             !state ||
@@ -2070,7 +2203,7 @@ function initBookOrderForm(
 
         /* -------------------------------------------------
            PIN CODE
-        ------------------------------------------------- */
+           ------------------------------------------------- */
 
         if (
             !pinCode ||
@@ -2096,7 +2229,7 @@ function initBookOrderForm(
 
     /* =====================================================
        NUMBER-ONLY INPUTS
-    ===================================================== */
+       ===================================================== */
 
     [
         mobileNumber,
@@ -2129,7 +2262,7 @@ function initBookOrderForm(
 
     /* =====================================================
        CLEAR ERROR WHEN USER TYPES
-    ===================================================== */
+       ===================================================== */
 
     [
         fullName,
@@ -2176,7 +2309,7 @@ function initBookOrderForm(
 
     /* =====================================================
        HIDE WHATSAPP ERROR WHEN USER RETRIES
-    ===================================================== */
+       ===================================================== */
 
     function clearWhatsappError() {
 
@@ -2223,7 +2356,7 @@ function initBookOrderForm(
 
     /* =====================================================
        SUBMIT
-    ===================================================== */
+       ===================================================== */
 
     form.addEventListener(
         "submit",
@@ -2234,7 +2367,7 @@ function initBookOrderForm(
 
             /* -------------------------------------------------
                VALIDATE CUSTOMER DATA
-            ------------------------------------------------- */
+               ------------------------------------------------- */
 
             if (!validate()) {
 
@@ -2250,6 +2383,7 @@ function initBookOrderForm(
 
                 }
 
+
                 return;
 
             }
@@ -2257,7 +2391,7 @@ function initBookOrderForm(
 
             /* -------------------------------------------------
                CHECK WHATSAPP NUMBER
-            ------------------------------------------------- */
+               ------------------------------------------------- */
 
             const cleanWhatsapp =
                 String(
@@ -2277,6 +2411,7 @@ function initBookOrderForm(
 
                 }
 
+
                 return;
 
             }
@@ -2284,7 +2419,7 @@ function initBookOrderForm(
 
             /* -------------------------------------------------
                COUNTRY CODES
-            ------------------------------------------------- */
+               ------------------------------------------------- */
 
             const selectedCountryCode =
                 countryCode
@@ -2300,7 +2435,7 @@ function initBookOrderForm(
 
             /* =================================================
                CREATE WHATSAPP MESSAGE
-            ================================================= */
+               ================================================= */
 
             let message = "";
 
@@ -2311,7 +2446,7 @@ function initBookOrderForm(
 
             /* -------------------------------------------------
                BOOK DETAILS
-            ------------------------------------------------- */
+               ------------------------------------------------- */
 
             message +=
                 "BOOK DETAILS\n";
@@ -2337,7 +2472,7 @@ function initBookOrderForm(
 
             /* -------------------------------------------------
                CUSTOMER DETAILS
-            ------------------------------------------------- */
+               ------------------------------------------------- */
 
             message +=
                 "\nCUSTOMER DETAILS\n";
@@ -2374,7 +2509,7 @@ function initBookOrderForm(
 
             /* -------------------------------------------------
                DELIVERY ADDRESS
-            ------------------------------------------------- */
+               ------------------------------------------------- */
 
             message +=
                 "\nDELIVERY ADDRESS\n";
@@ -2410,7 +2545,7 @@ function initBookOrderForm(
 
             /* =================================================
                WHATSAPP URL
-            ================================================= */
+               ================================================= */
 
             const whatsappUrl =
                 "https://wa.me/"
@@ -2423,7 +2558,7 @@ function initBookOrderForm(
 
             /* =================================================
                PREVENT DOUBLE CLICK
-            ================================================= */
+               ================================================= */
 
             const submitButton =
                 form.querySelector(
@@ -2436,10 +2571,12 @@ function initBookOrderForm(
                 submitButton.disabled =
                     true;
 
+
                 submitButton.setAttribute(
                     "aria-disabled",
                     "true"
                 );
+
 
                 submitButton.innerHTML =
                     '<i class="fa-brands fa-whatsapp"></i> Opening WhatsApp...';
@@ -2449,7 +2586,7 @@ function initBookOrderForm(
 
             /* =================================================
                OPEN WHATSAPP
-            ================================================= */
+               ================================================= */
 
             window.location.href =
                 whatsappUrl;

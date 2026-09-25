@@ -13,7 +13,7 @@ Urdu Adab | Shahid Nomani
      PAGE HERO
 ===================================================== -->
 
-<section class="page-hero">
+<section class="page-hero page-hero-adab">
 
     <div class="container">
 
@@ -21,9 +21,11 @@ Urdu Adab | Shahid Nomani
             URDU LITERATURE
         </span>
 
+
         <h1>
             Urdu Adab
         </h1>
+
 
         <p>
             Shayari, ghazal, poetry and other literary work.
@@ -69,6 +71,7 @@ Urdu Adab | Shahid Nomani
                         URDU ADAB
                     </span>
 
+
                     <h2>
                         {{ category or 'Other' }}
                     </h2>
@@ -82,7 +85,7 @@ Urdu Adab | Shahid Nomani
                  CATEGORY CARDS
             ================================================== -->
 
-            <div class="card-grid articles-grid">
+            <div class="card-grid articles-grid adab-grid">
 
 
                 {% for item in category_items %}
@@ -100,14 +103,18 @@ Urdu Adab | Shahid Nomani
 
                     {% if item.image %}
 
-                    <img
-                        src="{{ media_url(
-                            item.image,
-                            'adab'
-                        ) }}"
-                        alt="{{ item.title }}"
-                        loading="lazy"
-                    >
+                    <div class="card-media adab-card-media">
+
+                        <img
+                            src="{{ media_url(
+                                item.image,
+                                'adab'
+                            ) }}"
+                            alt="{{ item.title }}"
+                            loading="lazy"
+                        >
+
+                    </div>
 
                     {% endif %}
 
@@ -130,10 +137,13 @@ Urdu Adab | Shahid Nomani
 
 
                         <!-- =================================================
-                             SUMMARY / PREVIEW
+                             SUMMARY
                         ================================================== -->
 
-                        <p class="article-summary">
+                        <p
+                            class="article-summary"
+                            data-article-summary
+                        >
 
                             {{ item.summary or
                             'Explore this Urdu literary work and read the complete piece.' }}
@@ -156,6 +166,7 @@ Urdu Adab | Shahid Nomani
 
                                 {% if item.content %}
 
+
                                 <div class="rich-text">
 
                                     {{
@@ -167,7 +178,9 @@ Urdu Adab | Shahid Nomani
 
                                 </div>
 
+
                                 {% elif item.summary %}
+
 
                                 <div class="rich-text">
 
@@ -180,13 +193,16 @@ Urdu Adab | Shahid Nomani
 
                                 </div>
 
+
                                 {% else %}
+
 
                                 <p>
                                     This Urdu literary work is
                                     currently available without
                                     additional description.
                                 </p>
+
 
                                 {% endif %}
 
@@ -211,7 +227,11 @@ Urdu Adab | Shahid Nomani
                                 Read More
                             </span>
 
-                            <i class="fa-solid fa-chevron-down"></i>
+
+                            <i
+                                class="fa-solid fa-chevron-down"
+                                aria-hidden="true"
+                            ></i>
 
                         </button>
 
@@ -243,11 +263,16 @@ Urdu Adab | Shahid Nomani
 
         <div class="empty-state">
 
-            <i class="fa-solid fa-feather"></i>
+            <i
+                class="fa-solid fa-feather"
+                aria-hidden="true"
+            ></i>
+
 
             <h3>
                 No published Urdu Adab yet
             </h3>
+
 
             <p>
                 Urdu literature will appear here when published.

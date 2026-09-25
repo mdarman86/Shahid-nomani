@@ -13,7 +13,7 @@ Gallery | Shahid Nomani
      PAGE HERO
 ===================================================== -->
 
-<section class="page-hero">
+<section class="page-hero page-hero-gallery">
 
     <div class="container">
 
@@ -21,9 +21,11 @@ Gallery | Shahid Nomani
             MEMORIES
         </span>
 
+
         <h1>
             Gallery
         </h1>
+
 
         <p>
             Selected photographs from events and memories.
@@ -38,7 +40,7 @@ Gallery | Shahid Nomani
      GALLERY
 ===================================================== -->
 
-<section class="section">
+<section class="section gallery-page-section">
 
     <div class="container">
 
@@ -46,32 +48,40 @@ Gallery | Shahid Nomani
         {% if items %}
 
 
-        <div class="gallery-grid large">
+        <div class="gallery-grid large gallery-page-grid">
 
 
             {% for item in items %}
 
 
-            <figure>
+            <figure
+                class="gallery-item"
+            >
 
 
-                <img
-                    src="{{ media_url(
-                        item.image,
-                        'gallery'
-                    ) }}"
-                    alt="{{ item.caption or 'Gallery photo' }}"
-                    loading="lazy"
-                >
+                <div class="gallery-image-wrap">
+
+                    <img
+                        src="{{ media_url(
+                            item.image,
+                            'gallery'
+                        ) }}"
+                        alt="{{ item.caption or 'Gallery photo' }}"
+                        loading="lazy"
+                    >
+
+                </div>
 
 
                 {% if item.caption %}
+
 
                 <figcaption>
 
                     {{ item.caption }}
 
                 </figcaption>
+
 
                 {% endif %}
 
@@ -94,11 +104,16 @@ Gallery | Shahid Nomani
 
         <div class="empty-state">
 
-            <i class="fa-regular fa-image"></i>
+            <i
+                class="fa-regular fa-image"
+                aria-hidden="true"
+            ></i>
+
 
             <h3>
                 No gallery photos yet
             </h3>
+
 
             <p>
                 Gallery photos will appear here when published.

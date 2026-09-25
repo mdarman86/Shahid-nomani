@@ -13,7 +13,7 @@ Contact | Shahid Nomani
      CONTACT PAGE HERO
 ===================================================== -->
 
-<section class="page-hero">
+<section class="page-hero page-hero-contact">
 
     <div class="container">
 
@@ -40,7 +40,7 @@ Contact | Shahid Nomani
      CONTACT SECTION
 ===================================================== -->
 
-<section class="section">
+<section class="section contact-page-section">
 
     <div class="container contact-grid">
 
@@ -49,7 +49,8 @@ Contact | Shahid Nomani
              CONTACT INFORMATION
         ================================================== -->
 
-        <div>
+        <div class="contact-information">
+
 
             <span class="eyebrow">
                 GET IN TOUCH
@@ -66,20 +67,25 @@ Contact | Shahid Nomani
             </p>
 
 
-            <!-- FACEBOOK -->
+            <!-- =================================================
+                 FACEBOOK
+            ================================================== -->
 
             <div class="contact-item">
+
 
                 <i
                     class="fa-brands fa-facebook-f"
                     aria-hidden="true"
                 ></i>
 
+
                 <div>
 
                     <strong>
                         Facebook
                     </strong>
+
 
                     <a
                         href="https://www.facebook.com/shahid.nomani.al.misbahi"
@@ -91,23 +97,29 @@ Contact | Shahid Nomani
 
                 </div>
 
+
             </div>
 
 
-            <!-- INSTAGRAM -->
+            <!-- =================================================
+                 INSTAGRAM
+            ================================================== -->
 
             <div class="contact-item">
+
 
                 <i
                     class="fa-brands fa-instagram"
                     aria-hidden="true"
                 ></i>
 
+
                 <div>
 
                     <strong>
                         Instagram
                     </strong>
+
 
                     <a
                         href="https://www.instagram.com/shahidnomani07/"
@@ -119,7 +131,9 @@ Contact | Shahid Nomani
 
                 </div>
 
+
             </div>
+
 
         </div>
 
@@ -133,14 +147,18 @@ Contact | Shahid Nomani
             method="post"
         >
 
+
             {% include "_csrf.html" %}
 
 
-            <!-- NAME -->
+            <!-- =================================================
+                 NAME
+            ================================================== -->
 
             <label>
 
                 Name
+
 
                 <input
                     type="text"
@@ -152,11 +170,14 @@ Contact | Shahid Nomani
             </label>
 
 
-            <!-- EMAIL -->
+            <!-- =================================================
+                 EMAIL
+            ================================================== -->
 
             <label>
 
                 Email
+
 
                 <input
                     type="email"
@@ -168,11 +189,14 @@ Contact | Shahid Nomani
             </label>
 
 
-            <!-- MESSAGE -->
+            <!-- =================================================
+                 MESSAGE
+            ================================================== -->
 
             <label>
 
                 Message
+
 
                 <textarea
                     name="message"
@@ -183,7 +207,9 @@ Contact | Shahid Nomani
             </label>
 
 
-            <!-- SUBMIT -->
+            <!-- =================================================
+                 SUBMIT
+            ================================================== -->
 
             <button
                 class="btn btn-green"
@@ -192,6 +218,7 @@ Contact | Shahid Nomani
 
                 Send Message
 
+
                 <i
                     class="fa-solid fa-paper-plane"
                     aria-hidden="true"
@@ -199,7 +226,9 @@ Contact | Shahid Nomani
 
             </button>
 
+
         </form>
+
 
     </div>
 
